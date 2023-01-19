@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane prefHeight="674.0" prefWidth="882.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+   <children>
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchPage1" prefHeight="25.0" prefWidth="182.0" text="Bilan DEPENSES et RECETTES" />
+      <Label layoutX="193.0" layoutY="68.0" text="FORMULAIRE DE SAISI DE BUDGET POUR UN CHAPITRE">
+         <font>
+            <Font name="Arial Black" size="16.0" />
+         </font>
+      </Label>
+      <Button layoutX="215.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchPage3" prefHeight="25.0" prefWidth="182.0" text="Ajouter une écriture comptable" />
+      <Label layoutX="335.0" layoutY="165.0" text="Votre chapitre sera catégorisé dans :">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Label>
+      <RadioButton fx:id="radioButtonChapitreDepense" layoutX="363.0" layoutY="211.0" mnemonicParsing="false" text="Dépense" />
+      <RadioButton fx:id="radioButtonChapitreRecette" layoutX="451.0" layoutY="211.0" mnemonicParsing="false" text="Recette" />
+      <Label layoutX="345.0" layoutY="256.0" text="Entrez le nom de votre chapitre : ">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="335.0" layoutY="380.0" text="Saisissez le montant du budget (€) : ">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtBudgetChapitre" layoutX="367.0" layoutY="409.0" />
+      <Button layoutX="416.0" layoutY="466.0" mnemonicParsing="false" onAction="#creationChapitre" text="Valider" />
+      <TextField fx:id="txtNomChapitre" layoutX="350.0" layoutY="312.0" prefHeight="25.0" prefWidth="182.0" />
+   </children>
+</Pane>

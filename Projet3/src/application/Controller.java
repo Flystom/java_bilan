@@ -47,11 +47,13 @@ public class Controller implements Initializable{
     @FXML
     private TableColumn<Chapitre, String> Real_rec;
     
+    //TABLEAU CHAPITRE
     @FXML
     private TableView<Chapitre> tb_dep;
     @FXML
     private TableView<Chapitre> tb_rec;
     
+    //AFFICHE TOTAL
     @FXML
 	private Label TBudget_dep;
     @FXML
@@ -60,16 +62,6 @@ public class Controller implements Initializable{
 	private Label TBudget_rec;
     @FXML
 	private Label TReal_rec;
-	@FXML
-	private TextField txtNomChapitre;
-	@FXML
-	private TextField txtBudgetChapitre;
-	@FXML
-	private Label labAffichage;
-	@FXML
-	private RadioButton radioButtonChapitreDepense;	
-	@FXML
-	private RadioButton radioButtonChapitreRecette;
     
     private ObservableList<Chapitre> chapitres;
 		private Stage stage;
@@ -133,24 +125,6 @@ public class Controller implements Initializable{
         
         double totalMrealRec = connectBDD.totalBudgetDepense(listChapitres);
         TReal_rec.setText(String.valueOf(totalMrealRec));
-	}
-	
-	public void creationChapitre() {
-		
-		 if(radioButtonChapitreDepense.isSelected()){
-				System.out.println("depense");
-
-	        }
-	        else if(radioButtonChapitreRecette.isSelected()){
-				System.out.println("recette");
-
-	        }
-
-		String nomChapitre = txtNomChapitre.getText();
-		String budgetChapitre = txtBudgetChapitre.getText();
-		System.out.println("nom : "+ nomChapitre +" montant : " + budgetChapitre);
-		
-		
 	}
     
 	@Override

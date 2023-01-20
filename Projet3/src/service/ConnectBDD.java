@@ -29,9 +29,9 @@ public class ConnectBDD {
 			cn = DriverManager.getConnection(URL, LOGIN, PWD);
 			System.out.println("Connexion à la base de données (insertion)");
 			Statement st = cn.createStatement();
-			st.execute("create table chapitre (id int, categorie int, libelle varchar(250), budget int, montant_realise int)");
-			st.executeUpdate("INSERT INTO chapitre VALUES (011, 1, 'Charges à caractère général', 1139950.00 ,0)");
-			st.executeUpdate("INSERT INTO chapitre VALUES (025, 2, 'Test test', 2222223 ,0)");
+//			st.execute("create table chapitre (id int, categorie int, libelle varchar(250), budget int, montant_realise int)");
+//			st.executeUpdate("INSERT INTO chapitre VALUES (011, 1, 'Charges à caractère général', 1139950.00 ,0)");
+//			st.executeUpdate("INSERT INTO chapitre VALUES (025, 2, 'Test test', 2222223 ,0)");
 				
 		}catch (ClassNotFoundException e) {
 			    // TODO Auto-generated catch block

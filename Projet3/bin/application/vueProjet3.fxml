@@ -17,8 +17,8 @@
             <TableView fx:id="tb_dep" layoutX="1.0" layoutY="107.0" prefHeight="225.0" prefWidth="882.0">
               <columns>
                 <TableColumn fx:id="Chap_dep" prefWidth="543.0" text="Chapitre" />
-                <TableColumn fx:id="Bud_dep" minWidth="172.0" prefWidth="172.0" text="Budgétisé" />
-                  <TableColumn fx:id="Real_dep" prefWidth="172.0" text="Réalisé" />
+                <TableColumn fx:id="Bud_dep" minWidth="172.0" prefWidth="172.0" style="-fx-background-color: orange;" text="Budgétisé" />
+                  <TableColumn fx:id="Real_dep" prefWidth="172.0" style="-fx-background-color: yellow;" text="Réalisé" />
               </columns>
             </TableView>
             <Label layoutX="397.0" layoutY="382.0" text="RECETTES">
@@ -35,8 +35,8 @@
             <TableView fx:id="tb_rec" layoutY="411.0" prefHeight="233.0" prefWidth="882.0">
                <columns>
                   <TableColumn fx:id="Chap_rec" prefWidth="544.800030708313" text="Chapitre" />
-                  <TableColumn fx:id="Bud_rec" minWidth="2.4000244140625" prefWidth="172.0" text="Budgétisé" />
-                  <TableColumn fx:id="Real_rec" prefWidth="172.0" text="Réalisé" />
+                  <TableColumn fx:id="Bud_rec" minWidth="2.4000244140625" prefWidth="172.0" style="-fx-background-color: orange;" text="Budgétisé" />
+                  <TableColumn fx:id="Real_rec" prefWidth="172.0" style="-fx-background-color: yellow;" text="Réalisé" />
                </columns>
             </TableView>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1fff29" height="32.0" layoutY="332.0" stroke="BLACK" strokeType="INSIDE" width="543.0" />

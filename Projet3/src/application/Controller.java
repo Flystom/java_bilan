@@ -105,7 +105,7 @@ public class Controller implements Initializable{
         double totalbudgetdep = connectBDD.totalBudgetDepense(listChapitres);
         TBudget_dep.setText(String.valueOf(totalbudgetdep));
         
-        double totalMrealDep = connectBDD.totalBudgetDepense(listChapitres);
+        double totalMrealDep = connectBDD.totalMrealDepense(listChapitres);
         TReal_dep.setText(String.valueOf(totalMrealDep));
 	}
 	
@@ -120,16 +120,17 @@ public class Controller implements Initializable{
         chapitres = FXCollections.observableArrayList(listChapitres);
         tb_rec.setItems(chapitres);
         
-        double totalbudgetRec = connectBDD.totalBudgetDepense(listChapitres);
+        double totalbudgetRec = connectBDD.totalBudgetRec(listChapitres);
         TBudget_rec.setText(String.valueOf(totalbudgetRec));
         
-        double totalMrealRec = connectBDD.totalBudgetDepense(listChapitres);
+        double totalMrealRec = connectBDD.totalMrealRec(listChapitres);
         TReal_rec.setText(String.valueOf(totalMrealRec));
 	}
     
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		connectBDD = new ConnectBDD();
+		
 		try {
 			this.afficheDepense();
 		} catch (SQLException e) {

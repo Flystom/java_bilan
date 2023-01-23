@@ -29,9 +29,11 @@ public class ConnectBDD {
 			cn = DriverManager.getConnection(URL, LOGIN, PWD);
 			System.out.println("Connexion à la base de données (insertion)");
 			Statement st = cn.createStatement();
-//			st.execute("create table chapitre (id int, categorie int, libelle varchar(250), budget int, montant_realise int)");
-//			st.executeUpdate("INSERT INTO chapitre VALUES (011, 1, 'Charges à caractère général', 1139950.00 ,0)");
-//			st.executeUpdate("INSERT INTO chapitre VALUES (025, 2, 'Test test', 2222223 ,0)");
+//			st.execute("drop table chapitre");
+//			st.execute("create table chapitre (id INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1) PRIMARY KEY,"
+//					+ "categorie int, libelle varchar(255), budget int, montant_realise int)");
+//			st.executeUpdate("INSERT INTO chapitre (categorie, libelle, budget,montant_realise) VALUES (1, 'Charges à caractère général', 1139950 ,0)");
+//			st.executeUpdate("INSERT INTO chapitre (categorie, libelle, budget,montant_realise) VALUES (2, 'Test test', 2222223 ,0)");
 				
 		}catch (ClassNotFoundException e) {
 			    // TODO Auto-generated catch block
@@ -127,4 +129,20 @@ public class ConnectBDD {
 	        }
 			return totalMrealRec;
 		}
+		
+public void ajoutChapitre(String nomChapitre, int budgetChapitre, int categorie) throws SQLException {
+        
+            
+            Statement st = cn.createStatement();            
+            String insertSQL = "INSERT INTO chapitre (categorie, libelle, budget, montant_realise) VALUES (?, ?, ?, ?)";
+            PreparedStatement insertStmt = this.cn.prepareStatement(insertSQL);
+           
+            insertStmt.setInt(1, categorie);
+            insertStmt.setString(2, nomChapitre);
+            insertStmt.setInt(3, budgetChapitre);
+            insertStmt.setInt(4, 0);
+            insertStmt.executeUpdate();
+            insertStmt.close();
+            
+        }
 	}

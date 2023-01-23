@@ -21,8 +21,8 @@
             <Font name="Arial" size="13.0" />
          </font>
       </Label>
-      <RadioButton layoutX="363.0" layoutY="211.0" mnemonicParsing="false" text="Dépense" />
-      <RadioButton layoutX="451.0" layoutY="211.0" mnemonicParsing="false" text="Recette" />
+      <RadioButton fx:id="radioButtonChapitreDepense" layoutX="363.0" layoutY="211.0" mnemonicParsing="false" text="Dépense" />
+      <RadioButton fx:id="radioButtonChapitreRecette" layoutX="451.0" layoutY="211.0" mnemonicParsing="false" text="Recette" />
       <Label layoutX="345.0" layoutY="256.0" text="Entrez le nom de votre chapitre : ">
          <font>
             <Font name="Arial" size="13.0" />
@@ -33,8 +33,8 @@
             <Font name="Arial" size="13.0" />
          </font>
       </Label>
-      <TextField layoutX="367.0" layoutY="409.0" />
-      <Button layoutX="416.0" layoutY="466.0" mnemonicParsing="false" onAction="#creationChapitre" text="Valider" />
-      <TextField layoutX="350.0" layoutY="312.0" prefHeight="25.0" prefWidth="182.0" />
+      <TextField fx:id="txtBudgetChapitre" layoutX="367.0" layoutY="409.0" />
+      <Button layoutX="416.0" layoutY="466.0" mnemonicParsing="false" onAction="#BouttonValiderChapitre" text="Valider" />
+      <TextField fx:id="txtNomChapitre" layoutX="350.0" layoutY="312.0" prefHeight="25.0" prefWidth="182.0" />
    </children>
 </Pane>

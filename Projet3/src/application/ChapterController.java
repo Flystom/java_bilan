@@ -16,14 +16,12 @@ import service.ConnectBDD;
 
 public class ChapterController {
 
-	private ConnectBDD connectBDD;
+	private ConnectBDD connectBDD = new ConnectBDD();
 	
 	@FXML
 	private TextField txtNomChapitre;
 	@FXML
 	private TextField txtBudgetChapitre;
-	@FXML
-	private Label labAffichage;
 	@FXML
 	private RadioButton radioButtonChapitreDepense;	
 	@FXML
@@ -71,6 +69,31 @@ public class ChapterController {
 		String budgetChapitre = txtBudgetChapitre.getText();
 		System.out.println("nom : "+ nomChapitre +" montant : " + budgetChapitre);
 	}
+	
+	public void BouttonValiderChapitre() {
+
+        try {
+            int categorie=0;
+            String nomChapitre = txtNomChapitre.getText();
+            int budgetChapitre = Integer.parseInt(txtBudgetChapitre.getText());
+            System.out.println("nom : "+ nomChapitre +" montant : " + budgetChapitre);
+            
+             if(radioButtonChapitreDepense.isSelected()){
+                    System.out.println("depense");
+                    categorie=1;
+
+                }
+                else if(radioButtonChapitreRecette.isSelected()){
+                    System.out.println("recette");
+                    categorie=2;
+
+                }
+             connectBDD.ajoutChapitre(nomChapitre,budgetChapitre,categorie);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
 }
 
 

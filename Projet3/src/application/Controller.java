@@ -25,11 +25,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import service.ConnectBDD;
+import service.ChapitreBDD;
 
 public class Controller implements Initializable{
 
-	private ConnectBDD connectBDD;
+	private ChapitreBDD chapitreBDD;
 	
 	//DÉPENSES
 	@FXML
@@ -92,8 +92,7 @@ public class Controller implements Initializable{
 	}
 		
 	public void afficheDepense() throws SQLException { 
-		List<Chapitre> listChapitres = connectBDD.resultatDepense();
-		System.out.println(listChapitres);
+		List<Chapitre> listChapitres = chapitreBDD.resultatDepense();
 		
 		Chap_dep.setCellValueFactory(new PropertyValueFactory<>("titre"));
 		Bud_dep.setCellValueFactory(new PropertyValueFactory<>("budget"));
@@ -102,16 +101,15 @@ public class Controller implements Initializable{
         chapitres = FXCollections.observableArrayList(listChapitres);
         tb_dep.setItems(chapitres);
         
-        double totalbudgetdep = connectBDD.totalBudgetDepense(listChapitres);
+        double totalbudgetdep = chapitreBDD.totalBudgetDepense(listChapitres);
         TBudget_dep.setText(String.valueOf(totalbudgetdep));
         
-        double totalMrealDep = connectBDD.totalMrealDepense(listChapitres);
+        double totalMrealDep = chapitreBDD.totalMrealDepense(listChapitres);
         TReal_dep.setText(String.valueOf(totalMrealDep));
 	}
 	
 	public void afficheRecette() throws SQLException { 
-		List<Chapitre> listChapitres = connectBDD.resultatRecette();
-		System.out.println(listChapitres);
+		List<Chapitre> listChapitres = chapitreBDD.resultatRecette();
 		
 		Chap_rec.setCellValueFactory(new PropertyValueFactory<>("titre"));
 		Bud_rec.setCellValueFactory(new PropertyValueFactory<>("budget"));
@@ -120,16 +118,16 @@ public class Controller implements Initializable{
         chapitres = FXCollections.observableArrayList(listChapitres);
         tb_rec.setItems(chapitres);
         
-        double totalbudgetRec = connectBDD.totalBudgetRec(listChapitres);
+        double totalbudgetRec = chapitreBDD.totalBudgetRec(listChapitres);
         TBudget_rec.setText(String.valueOf(totalbudgetRec));
         
-        double totalMrealRec = connectBDD.totalMrealRec(listChapitres);
+        double totalMrealRec = chapitreBDD.totalMrealRec(listChapitres);
         TReal_rec.setText(String.valueOf(totalMrealRec));
 	}
     
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		connectBDD = new ConnectBDD();
+		chapitreBDD = new ChapitreBDD();
 		
 		try {
 			this.afficheDepense();

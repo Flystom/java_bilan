@@ -15,20 +15,25 @@ import java.util.List;
 import java.net.URL;
 
 import entite.Chapitre;
+import entite.Ligne;
 
-public class ConnectBDD {
+public class ChapitreBDD {
 	Connection cn = null;
 	private String URL = "jdbc:derby:java_bilan;create=true";
 	private String DRIVER = "org.apache.derby.jdbc.EmbeddedDriver";
 	private String LOGIN = "";
 	private String PWD = "";
 	
-	public ConnectBDD() {
+	public ChapitreBDD() {
 		try {
 			Class.forName(DRIVER);
 			cn = DriverManager.getConnection(URL, LOGIN, PWD);
 			System.out.println("Connexion à la base de données (insertion)");
 			Statement st = cn.createStatement();
+//			st.execute("drop table ligne");
+//			st.execute("create table ligne (id INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1) PRIMARY KEY,"
+//					+ "nom_ligne varchar(255), id_chapitre int, montant DOUBLE PRECISION)");
+//			
 //			st.execute("drop table chapitre");
 //			st.execute("create table chapitre (id INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1) PRIMARY KEY,"
 //					+ "categorie int, libelle varchar(255), budget int, montant_realise int)");
@@ -72,8 +77,6 @@ public class ConnectBDD {
 			double totalbudgetdep = 0;
 			for (Chapitre dep : listChapitres) {
 				totalbudgetdep += dep.getBudget();
-				
-				System.out.println(dep);
 	        }
 			return totalbudgetdep;
 		}
@@ -82,8 +85,6 @@ public class ConnectBDD {
 			double totalMrealDep = 0;
 			for (Chapitre dep : listChapitres) {
 				totalMrealDep += dep.getMontant_realise();
-				
-				System.out.println(dep);
 	        }
 			return totalMrealDep;
 		}
@@ -110,6 +111,7 @@ public class ConnectBDD {
 			
 		}
 		
+		
 		public double totalBudgetRec(List<Chapitre> listChapitres){
 			double totalbudgetRec = 0;
 			for (Chapitre rec : listChapitres) {
@@ -125,12 +127,11 @@ public class ConnectBDD {
 			for (Chapitre rec : listChapitres) {
 				totalMrealRec += rec.getMontant_realise();
 				
-				System.out.println(rec);
 	        }
 			return totalMrealRec;
 		}
 		
-public void ajoutChapitre(String nomChapitre, int budgetChapitre, int categorie) throws SQLException {
+		public void ajoutChapitre(String nomChapitre, int budgetChapitre, int categorie) throws SQLException {
         
             
             Statement st = cn.createStatement();            
@@ -145,4 +146,19 @@ public void ajoutChapitre(String nomChapitre, int budgetChapitre, int categorie)
             insertStmt.close();
             
         }
+		public void updateMontantChapitre(int idChapitre, Double budget) throws SQLException {
+    
+    
+		    Statement st = cn.createStatement();            
+		    String updateSQL = "UPDATE chapitre SET montant_realise = montant_realise + " + budget + " WHERE id = " + idChapitre;
+		    PreparedStatement insertStmt = this.cn.prepareStatement(updateSQL);
+		   
+		    insertStmt.executeUpdate();
+		    insertStmt.close();
+	    
+		}
+		
+
+			
+		
 	}

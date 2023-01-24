@@ -13,7 +13,6 @@
    <children>
       <Pane prefHeight="674.0" prefWidth="882.0" style="-fx-background-color: white;">
          <children>
-            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchPage2" prefHeight="25.0" prefWidth="159.0" text="Créer un nouveau chapitre" />
             <TableView fx:id="tb_dep" layoutX="1.0" layoutY="107.0" prefHeight="225.0" prefWidth="882.0">
               <columns>
                 <TableColumn fx:id="Chap_dep" prefWidth="543.0" text="Chapitre" />
@@ -31,7 +30,6 @@
                   <Font name="Arial Black" size="16.0" />
                </font>
             </Label>
-            <Button layoutX="185.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchPage3" prefHeight="25.0" prefWidth="182.0" text="Ajouter une écriture comptable" />
             <TableView fx:id="tb_rec" layoutY="411.0" prefHeight="233.0" prefWidth="882.0">
                <columns>
                   <TableColumn fx:id="Chap_rec" prefWidth="544.800030708313" text="Chapitre" />
@@ -73,6 +71,14 @@
             <Label layoutX="12.0" layoutY="644.0" prefHeight="17.0" prefWidth="67.0" text="TOTAL">
                <font>
                   <Font size="20.0" />
+               </font>
+            </Label>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" depthTest="DISABLE" fill="#acacac" height="54.0" layoutX="6.0" layoutY="7.0" stroke="BLACK" strokeType="INSIDE" width="869.0" />
+            <Button layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#switchPage2" prefHeight="25.0" prefWidth="159.0" text="Créer un nouveau chapitre" />
+            <Button layoutX="182.0" layoutY="20.0" mnemonicParsing="false" onAction="#switchPage3" prefHeight="25.0" prefWidth="182.0" text="Ajouter une écriture comptable" />
+            <Label layoutX="579.0" layoutY="14.0" text="MENU">
+               <font>
+                  <Font name="System Bold" size="27.0" />
                </font>
             </Label>
          </children></Pane>

@@ -12,11 +12,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import service.ConnectBDD;
+import service.ChapitreBDD;
 
 public class ChapterController {
 
-	private ConnectBDD connectBDD = new ConnectBDD();
+	private ChapitreBDD connectBDD = new ChapitreBDD();
 	
 	@FXML
 	private TextField txtNomChapitre;

@@ -5,13 +5,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LineModifController">
+<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LigneModifController">
    <children>
       <Pane layoutX="425.0" layoutY="377.0" prefHeight="200.0" prefWidth="200.0" />
-      <TableView fx:id="tableau_ligne" layoutX="137.0" layoutY="211.0" prefHeight="200.0" prefWidth="352.0">
+      <TableView fx:id="tableauLigne" layoutX="137.0" layoutY="211.0" prefHeight="200.0" prefWidth="352.0">
         <columns>
-          <TableColumn fx:id="nom_ligne" prefWidth="119.99998474121094" text="nom_ligne" />
-          <TableColumn fx:id="idchap" prefWidth="112.79998779296875" text="id_chapitre" />
+          <TableColumn fx:id="nomLigne" prefWidth="119.99998474121094" text="nom_ligne" />
+          <TableColumn fx:id="idChapitre" prefWidth="112.79998779296875" text="id_chapitre" />
             <TableColumn fx:id="montant" prefWidth="119.20001220703125" text="montant" />
         </columns>
       </TableView>

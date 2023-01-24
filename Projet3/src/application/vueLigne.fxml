@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LineController">
+<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LigneController">
    <children>
       <Pane prefHeight="684.0" prefWidth="892.0" style="-fx-background-color: yellow;">
          <children>
@@ -47,11 +47,11 @@
                   <Font name="Arial" size="23.0" />
                </font>
             </Label>
-            <TextField fx:id="montant_ecriture" layoutX="359.0" layoutY="580.0" />
+            <TextField fx:id="montantEcriture" layoutX="359.0" layoutY="580.0" />
             <Button fx:id="valider" layoutX="336.0" layoutY="630.0" mnemonicParsing="false" onAction="#BouttonValiderLigne" text="Valider" />
             <TableView fx:id="tableau" layoutX="203.0" layoutY="257.0" prefHeight="200.0" prefWidth="476.0">
               <columns>
-                <TableColumn fx:id="Chap_nom" prefWidth="334.3999938964844" text="Nom du chapitre" />
+                <TableColumn fx:id="ChapNom" prefWidth="334.3999938964844" text="Nom du chapitre" />
                 <TableColumn fx:id="Budget" minWidth="0.0" prefWidth="142.4000244140625" text="Budget" />
               </columns>
             </TableView>

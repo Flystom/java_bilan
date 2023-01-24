@@ -30,16 +30,24 @@ public class ChapitreBDD {
 			cn = DriverManager.getConnection(URL, LOGIN, PWD);
 			System.out.println("Connexion à la base de données (insertion)");
 			Statement st = cn.createStatement();
-//			st.execute("drop table ligne");
-//			st.execute("create table ligne (id INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1) PRIMARY KEY,"
-//					+ "nom_ligne varchar(255), id_chapitre int, montant DOUBLE PRECISION)");
-//			
-//			st.execute("drop table chapitre");
-//			st.execute("create table chapitre (id INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1) PRIMARY KEY,"
-//					+ "categorie int, libelle varchar(255), budget int, montant_realise int)");
-//			st.executeUpdate("INSERT INTO chapitre (categorie, libelle, budget,montant_realise) VALUES (1, 'Charges à caractère général', 1139950 ,0)");
-//			st.executeUpdate("INSERT INTO chapitre (categorie, libelle, budget,montant_realise) VALUES (2, 'Test test', 2222223 ,0)");
-				
+			System.out.println(cn);
+	/*		st.execute("drop table ligne");
+			st.execute("create table ligne (id INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1) PRIMARY KEY,"
+					+ "nomLigne varchar(255), idChapitre int, montant DOUBLE PRECISION)");
+
+			st.execute("drop table chapitre");
+			st.execute("create table chapitre (id INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1) PRIMARY KEY,"
+					+ "categorie int, libelle varchar(255), budget int, montantRealise int)");
+			st.executeUpdate("INSERT INTO chapitre (categorie, libelle, budget,montantRealise) VALUES (1, 'Charges à caractère général', 1139950 ,0)");
+			st.executeUpdate("INSERT INTO chapitre (categorie, libelle, budget,montantRealise) VALUES (2, 'Test test', 2222223 ,0)");
+			
+			st.execute("drop table utilisateur");
+			st.execute("create table utilisateur (id INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1) PRIMARY KEY,"
+					+ "nom varchar(255), mdp varchar(255))");
+			st.executeUpdate("INSERT INTO utilisateur (nom, mdp) VALUES ('Antonin', 'Antonin')");
+			st.executeUpdate("INSERT INTO utilisateur (nom, mdp) VALUES ('Florian', 'Florian')");
+			
+	*/			
 		}catch (ClassNotFoundException e) {
 			    // TODO Auto-generated catch block
 			    e.printStackTrace();
@@ -53,22 +61,20 @@ public class ChapitreBDD {
 	
 		public List<Chapitre> resultatDepense() {
 			try {
-				System.out.println("Connection à la base de données pour les dépenses (récupération)");
 				Statement st = cn.createStatement();
 				ResultSet csDepense = st.executeQuery("SELECT * FROM chapitre WHERE categorie = 1");
-				
 				List<Chapitre> listDep = new ArrayList<>();
 				while(csDepense.next()) {
-					Chapitre chapitre = new Chapitre(csDepense.getInt("id"), csDepense.getInt("categorie"), csDepense.getString("libelle"), csDepense.getInt("budget"),csDepense.getInt("montant_realise"));
+					Chapitre chapitre = new Chapitre(csDepense.getInt("id"), csDepense.getInt("categorie"), csDepense.getString("libelle"), csDepense.getInt("budget"),csDepense.getInt("montantRealise"));
 					listDep.add(chapitre);
 				}
 				return listDep;
 					
 			}
-				catch (SQLException e) {
-				    // TODO Auto-generated catch block
-				    e.printStackTrace();
-				}
+			catch (SQLException e) {
+			    // TODO Auto-generated catch block
+			    e.printStackTrace();
+			}
 			return null;
 			
 		}
@@ -81,23 +87,23 @@ public class ChapitreBDD {
 			return totalbudgetdep;
 		}
 		
-		public double totalMrealDepense(List<Chapitre> listChapitres){
+		public double totalMontantRealiseDepense(List<Chapitre> listChapitres){
 			double totalMrealDep = 0;
 			for (Chapitre dep : listChapitres) {
-				totalMrealDep += dep.getMontant_realise();
+				totalMrealDep += dep.getMontantRealise();
 	        }
 			return totalMrealDep;
 		}
 		
 		public List<Chapitre> resultatRecette() {
 			try {
-				System.out.println("Connection à la base de données pour les recettes (récupération)");
+				System.out.println("Connexion à la base de données pour les recettes (récupération)");
 				Statement st = cn.createStatement();
 				ResultSet csRecette = st.executeQuery("SELECT * FROM chapitre WHERE categorie = 2");
 				
 				List<Chapitre> listRec = new ArrayList<>();
 				while(csRecette.next()) {
-					Chapitre chapitre = new Chapitre(csRecette.getInt("id"), csRecette.getInt("categorie"), csRecette.getString("libelle"), csRecette.getInt("budget"),csRecette.getInt("montant_realise"));
+					Chapitre chapitre = new Chapitre(csRecette.getInt("id"), csRecette.getInt("categorie"), csRecette.getString("libelle"), csRecette.getInt("budget"),csRecette.getInt("montantRealise"));
 					listRec.add(chapitre);
 				}
 				return listRec;
@@ -125,7 +131,7 @@ public class ChapitreBDD {
 		public double totalMrealRec(List<Chapitre> listChapitres){
 			double totalMrealRec = 0;
 			for (Chapitre rec : listChapitres) {
-				totalMrealRec += rec.getMontant_realise();
+				totalMrealRec += rec.getMontantRealise();
 				
 	        }
 			return totalMrealRec;
@@ -146,11 +152,12 @@ public class ChapitreBDD {
             insertStmt.close();
             
         }
+		
 		public void updateMontantChapitre(int idChapitre, Double budget) throws SQLException {
     
     
 		    Statement st = cn.createStatement();            
-		    String updateSQL = "UPDATE chapitre SET montant_realise = montant_realise + " + budget + " WHERE id = " + idChapitre;
+		    String updateSQL = "UPDATE chapitre SET montantRealise = montantRealise + " + budget + " WHERE id = " + idChapitre;
 		    PreparedStatement insertStmt = this.cn.prepareStatement(updateSQL);
 		   
 		    insertStmt.executeUpdate();

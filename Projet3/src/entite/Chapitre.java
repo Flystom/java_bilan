@@ -3,22 +3,24 @@ package entite;
 public class Chapitre {
 
 	private int id;
-	//categorie: 1 = Dépenses / 2 = Recettes
+	//categorie : 
+	//Dépenses = 1 
+	//Recettes = 2
 	private int categorie;
 	private String libelle;
 	private String titre;
 	private int budget;
-	private int montant_realise;
+	private int montantRealise;
 	
 
 	
-	public Chapitre(int id, int categorie, String libelle, int budget, int montant_realise) {
+	public Chapitre(int id, int categorie, String libelle, int budget, int montantRealise) {
 	    this.id = id;
 	    this.titre = id + " " + libelle;
 	    this.categorie = categorie;
 		this.libelle = libelle;
 		this.budget = budget;
-		this.montant_realise = montant_realise;
+		this.montantRealise = montantRealise;
 	}
 
 
@@ -70,13 +72,13 @@ public class Chapitre {
 	}
 
 
-	public int getMontant_realise() {
-		return montant_realise;
+	public int getMontantRealise() {
+		return montantRealise;
 	}
 
 
-	public void setMontant_realise(int montant_realise) {
-		this.montant_realise = montant_realise;
+	public void setMontantRealise(int montantRealise) {
+		this.montantRealise = montantRealise;
 	}
 	
 	

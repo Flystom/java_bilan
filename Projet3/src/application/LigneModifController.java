@@ -40,20 +40,20 @@ import javafx.stage.Stage;
 import service.ChapitreBDD;
 import service.LigneBDD;
 
-public class LineModifController implements Initializable {
+public class LigneModifController implements Initializable {
 	
 	private LigneBDD ligneBDD;
 	
 	//DÉPENSES
 	@FXML
-	private TableColumn<Ligne, String> nom_ligne;
+	private TableColumn<Ligne, String> nomLigne;
 	@FXML
-	private TableColumn<Ligne, Integer> idchap;
+	private TableColumn<Ligne, Integer> idChapitre;
 	@FXML
 	private TableColumn<Ligne, String> montant;
 	
     @FXML
-    private TableView<Ligne> tableau_ligne;
+    private TableView<Ligne> tableauLigne;
     
 	
     private ObservableList<Ligne> lignes;
@@ -65,7 +65,7 @@ public class LineModifController implements Initializable {
 	
 	//Changement de page
 		public void switchPage1(ActionEvent event) throws IOException{
-			Parent root = FXMLLoader.load(getClass().getResource("vueProjet3.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("vueBilan.fxml"));
 			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			scene = new Scene(root);
 			stage.setScene(scene);
@@ -89,12 +89,12 @@ public class LineModifController implements Initializable {
 		public void afficheLignes() throws SQLException { 
 			List<Ligne> listLigne = ligneBDD.resultatLigne();
 			System.out.println(listLigne);
-			this.nom_ligne.setCellValueFactory(new PropertyValueFactory<>("nom_ligne"));
-			this.idchap.setCellValueFactory(new PropertyValueFactory<>("id_chapitre"));
+			this.nomLigne.setCellValueFactory(new PropertyValueFactory<>("nomLigne"));
+			this.idChapitre.setCellValueFactory(new PropertyValueFactory<>("idChapitre"));
 			this.montant.setCellValueFactory(new PropertyValueFactory<>("montant"));
 	        
 	        lignes = FXCollections.observableArrayList(listLigne);
-	        tableau_ligne.setItems(lignes);
+	        tableauLigne.setItems(lignes);
 		}
 		
 		

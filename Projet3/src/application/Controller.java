@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import org.json.JSONException;
+
 
 import entite.Chapitre;
 import javafx.collections.FXCollections;
@@ -19,10 +19,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import service.ChapitreBDD;
@@ -33,44 +31,42 @@ public class Controller implements Initializable{
 	
 	//DÉPENSES
 	@FXML
-    private TableColumn<Chapitre, String> Chap_dep;
+    private TableColumn<Chapitre, String> nomChapitreDepense;
     @FXML
-    private TableColumn<Chapitre, String> Bud_dep;
+    private TableColumn<Chapitre, String> budgetChapitreDepense;
     @FXML
-    private TableColumn<Chapitre, String> Real_dep;
+    private TableColumn<Chapitre, String> montantRealiseChapitreDepense;
     
     //RECETTES
     @FXML
-    private TableColumn<Chapitre, String> Chap_rec;
+    private TableColumn<Chapitre, String> nomChapitreRecette;
     @FXML
-    private TableColumn<Chapitre, String> Bud_rec;
+    private TableColumn<Chapitre, String> budgetChapitreRecette;
     @FXML
-    private TableColumn<Chapitre, String> Real_rec;
+    private TableColumn<Chapitre, String> montantRealiseChapitreRecette;
     
     //TABLEAU CHAPITRE
     @FXML
-    private TableView<Chapitre> tb_dep;
+    private TableView<Chapitre> tableViewDepense;
     @FXML
-    private TableView<Chapitre> tb_rec;
+    private TableView<Chapitre> tableViewRecette;
     
     //AFFICHE TOTAL
     @FXML
-	private Label TBudget_dep;
+	private Label totalBudgetDepense;
     @FXML
-	private Label TReal_dep;
+	private Label totalMontantRealiseDepense;
     @FXML
-	private Label TBudget_rec;
+	private Label totalBudgetRecette;
     @FXML
-	private Label TReal_rec;
+	private Label totalMontantRealiseRecette;
     
     private ObservableList<Chapitre> chapitres;
 		private Stage stage;
 		private Scene scene;
-		private Parent root;
-    
 		//Changement de page
 	public void switchPage1(ActionEvent event) throws IOException{
-		Parent root = FXMLLoader.load(getClass().getResource("vueProjet3.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("vueBilan.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
@@ -94,35 +90,35 @@ public class Controller implements Initializable{
 	public void afficheDepense() throws SQLException { 
 		List<Chapitre> listChapitres = chapitreBDD.resultatDepense();
 		
-		Chap_dep.setCellValueFactory(new PropertyValueFactory<>("titre"));
-		Bud_dep.setCellValueFactory(new PropertyValueFactory<>("budget"));
-        Real_dep.setCellValueFactory(new PropertyValueFactory<>("montant_realise"));     
+		nomChapitreDepense.setCellValueFactory(new PropertyValueFactory<>("titre"));
+		budgetChapitreDepense.setCellValueFactory(new PropertyValueFactory<>("budget"));
+		montantRealiseChapitreDepense.setCellValueFactory(new PropertyValueFactory<>("montantRealise"));     
         
         chapitres = FXCollections.observableArrayList(listChapitres);
-        tb_dep.setItems(chapitres);
+        tableViewDepense.setItems(chapitres);
         
         double totalbudgetdep = chapitreBDD.totalBudgetDepense(listChapitres);
-        TBudget_dep.setText(String.valueOf(totalbudgetdep));
+        totalBudgetDepense.setText(String.valueOf(totalbudgetdep));
         
-        double totalMrealDep = chapitreBDD.totalMrealDepense(listChapitres);
-        TReal_dep.setText(String.valueOf(totalMrealDep));
+        double totalMrealDep = chapitreBDD.totalMontantRealiseDepense(listChapitres);
+        totalMontantRealiseDepense.setText(String.valueOf(totalMrealDep));
 	}
 	
 	public void afficheRecette() throws SQLException { 
 		List<Chapitre> listChapitres = chapitreBDD.resultatRecette();
 		
-		Chap_rec.setCellValueFactory(new PropertyValueFactory<>("titre"));
-		Bud_rec.setCellValueFactory(new PropertyValueFactory<>("budget"));
-        Real_rec.setCellValueFactory(new PropertyValueFactory<>("montant_realise"));
+		nomChapitreRecette.setCellValueFactory(new PropertyValueFactory<>("titre"));
+		budgetChapitreRecette.setCellValueFactory(new PropertyValueFactory<>("budget"));
+		montantRealiseChapitreRecette.setCellValueFactory(new PropertyValueFactory<>("montantRealise"));
         
         chapitres = FXCollections.observableArrayList(listChapitres);
-        tb_rec.setItems(chapitres);
+        tableViewRecette.setItems(chapitres);
         
         double totalbudgetRec = chapitreBDD.totalBudgetRec(listChapitres);
-        TBudget_rec.setText(String.valueOf(totalbudgetRec));
+        totalBudgetRecette.setText(String.valueOf(totalbudgetRec));
         
         double totalMrealRec = chapitreBDD.totalMrealRec(listChapitres);
-        TReal_rec.setText(String.valueOf(totalMrealRec));
+        totalMontantRealiseRecette.setText(String.valueOf(totalMrealRec));
 	}
     
 	@Override

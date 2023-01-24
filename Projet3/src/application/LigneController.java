@@ -39,7 +39,7 @@ import javafx.stage.Stage;
 import service.ChapitreBDD;
 import service.LigneBDD;
 
-public class LineController {
+public class LigneController {
 
 	private ChapitreBDD chapitreBDD = new ChapitreBDD();
 	private LigneBDD ligneBDD = new LigneBDD();
@@ -53,7 +53,7 @@ public class LineController {
 
 	//DÉPENSES
 	@FXML
-	private TableColumn<Chapitre, String> Chap_nom;
+	private TableColumn<Chapitre, String> ChapNom;
 	@FXML
 	private TableColumn<Chapitre, String> Budget;
 	
@@ -62,7 +62,7 @@ public class LineController {
 	private TableView<Chapitre> tableau;
 	
 	@FXML
-	private TextField montant_ecriture;
+	private TextField montantEcriture;
 	
 	@FXML
 	private Button valider;
@@ -80,7 +80,7 @@ public class LineController {
 	
 	//Changement de page
 		public void switchPage1(ActionEvent event) throws IOException{
-			Parent root = FXMLLoader.load(getClass().getResource("vueProjet3.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("vueBilan.fxml"));
 			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			scene = new Scene(root);
 			stage.setScene(scene);
@@ -111,7 +111,7 @@ public class LineController {
 		public void afficheDepense() throws SQLException { 
 			List<Chapitre> listChapitres = chapitreBDD.resultatDepense();
 						
-			Chap_nom.setCellValueFactory(new PropertyValueFactory<>("titre"));
+			ChapNom.setCellValueFactory(new PropertyValueFactory<>("titre"));
 			Budget.setCellValueFactory(new PropertyValueFactory<>("budget")); 
 	        
 	        chapitres = FXCollections.observableArrayList(listChapitres);
@@ -122,7 +122,7 @@ public class LineController {
 		public void afficheRecette() throws SQLException { 
 			List<Chapitre> listChapitres = chapitreBDD.resultatRecette();
 			
-			Chap_nom.setCellValueFactory(new PropertyValueFactory<>("titre"));
+			ChapNom.setCellValueFactory(new PropertyValueFactory<>("titre"));
 			Budget.setCellValueFactory(new PropertyValueFactory<>("budget"));
 	        
 	        chapitres = FXCollections.observableArrayList(listChapitres);
@@ -133,7 +133,7 @@ public class LineController {
 
 	        try {
 	            String nomLigne = txtNomLigne.getText();
-	            double Montant = Float.parseFloat(montant_ecriture.getText());
+	            double Montant = Float.parseFloat(montantEcriture.getText());
 	            int selectedChap = tableau.getSelectionModel().getSelectedItem().getId();
 	            
 	            ligneBDD.ajoutLigne(nomLigne, selectedChap, Montant);

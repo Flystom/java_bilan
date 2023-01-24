@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="674.0" prefWidth="882.0" style="-fx-background-color: orange;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ChapterController">
+<Pane prefHeight="674.0" prefWidth="882.0" style="-fx-background-color: orange;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ChapitreController">
    <children>
       <Label layoutX="111.0" layoutY="96.0" text="FORMULAIRE DE SAISI DE BUDGET POUR UN CHAPITRE">
          <font>

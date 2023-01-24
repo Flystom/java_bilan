@@ -2,15 +2,15 @@ package entite;
 
 public class Ligne {
 	private int id;
-	private String nom_ligne;
-	private int id_chapitre;
+	private String nomLigne;
+	private int idChapitre;
 	private double montant;
 
-	public Ligne(int id, String nom_ligne, int id_chapitre, double montant) {
+	public Ligne(int id, String nomLigne, int idChapitre, double montant) {
 		super();
 		this.id = id;
-		this.nom_ligne = nom_ligne;
-		this.id_chapitre = id_chapitre;
+		this.nomLigne = nomLigne;
+		this.idChapitre = idChapitre;
 		this.montant = montant;
 	}
 	public int getId() {
@@ -19,17 +19,17 @@ public class Ligne {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getNom_ligne() {
-		return nom_ligne;
+	public String getNomLigne() {
+		return nomLigne;
 	}
-	public void setNom_ligne(String nom_ligne) {
-		this.nom_ligne = nom_ligne;
+	public void setNomLigne(String nomLigne) {
+		this.nomLigne = nomLigne;
 	}
-	public int getId_chapitre() {
-		return id_chapitre;
+	public int getIdChapitre() {
+		return idChapitre;
 	}
-	public void setId_chapitre(int id_chapitre) {
-		this.id_chapitre = id_chapitre;
+	public void setIdChapitre(int idChapitre) {
+		this.idChapitre = idChapitre;
 	}
 	public double getMontant() {
 		return montant;

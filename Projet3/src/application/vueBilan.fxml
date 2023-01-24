@@ -13,11 +13,11 @@
    <children>
       <Pane prefHeight="674.0" prefWidth="882.0" style="-fx-background-color: white;">
          <children>
-            <TableView fx:id="tb_dep" layoutX="1.0" layoutY="107.0" prefHeight="225.0" prefWidth="882.0">
+            <TableView fx:id="tableViewDepense" layoutX="1.0" layoutY="107.0" prefHeight="225.0" prefWidth="882.0">
               <columns>
-                <TableColumn fx:id="Chap_dep" prefWidth="543.0" text="Chapitre" />
-                <TableColumn fx:id="Bud_dep" minWidth="172.0" prefWidth="172.0" style="-fx-background-color: orange;" text="Budgétisé" />
-                  <TableColumn fx:id="Real_dep" prefWidth="172.0" style="-fx-background-color: yellow;" text="Réalisé" />
+                <TableColumn fx:id="nomChapitreDepense" prefWidth="543.0" text="Chapitre" />
+                <TableColumn fx:id="budgetChapitreDepense" minWidth="172.0" prefWidth="172.0" style="-fx-background-color: orange;" text="Budgétisé" />
+                  <TableColumn fx:id="montantRealiseChapitreDepense" prefWidth="172.0" style="-fx-background-color: yellow;" text="Réalisé" />
               </columns>
             </TableView>
             <Label layoutX="397.0" layoutY="382.0" text="RECETTES">
@@ -30,22 +30,22 @@
                   <Font name="Arial Black" size="16.0" />
                </font>
             </Label>
-            <TableView fx:id="tb_rec" layoutY="411.0" prefHeight="233.0" prefWidth="882.0">
+            <TableView fx:id="tableViewRecette" layoutY="411.0" prefHeight="233.0" prefWidth="882.0">
                <columns>
-                  <TableColumn fx:id="Chap_rec" prefWidth="544.800030708313" text="Chapitre" />
-                  <TableColumn fx:id="Bud_rec" minWidth="2.4000244140625" prefWidth="172.0" style="-fx-background-color: orange;" text="Budgétisé" />
-                  <TableColumn fx:id="Real_rec" prefWidth="172.0" style="-fx-background-color: yellow;" text="Réalisé" />
+                  <TableColumn fx:id="nomChapitreRecette" prefWidth="544.800030708313" text="Chapitre" />
+                  <TableColumn fx:id="budgetChapitreRecette" minWidth="2.4000244140625" prefWidth="172.0" style="-fx-background-color: orange;" text="Budgétisé" />
+                  <TableColumn fx:id="montantRealiseChapitreRecette" prefWidth="172.0" style="-fx-background-color: yellow;" text="Réalisé" />
                </columns>
             </TableView>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1fff29" height="32.0" layoutY="332.0" stroke="BLACK" strokeType="INSIDE" width="543.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1fff29" height="32.0" layoutX="543.0" layoutY="332.0" stroke="BLACK" strokeType="INSIDE" width="172.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1fff29" height="32.0" layoutX="715.0" layoutY="332.0" stroke="BLACK" strokeType="INSIDE" width="169.0" />
-            <Label fx:id="TBudget_dep" alignment="CENTER" layoutX="543.0" layoutY="333.0" prefHeight="32.0" prefWidth="172.0" text="Total Budget" textAlignment="CENTER">
+            <Label fx:id="totalBudgetDepense" alignment="CENTER" layoutX="543.0" layoutY="333.0" prefHeight="32.0" prefWidth="172.0" text="Total Budget" textAlignment="CENTER">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-            <Label fx:id="TReal_dep" alignment="CENTER" layoutX="716.0" layoutY="332.0" prefHeight="32.0" prefWidth="169.0" text="Total Réalisé" textAlignment="CENTER">
+            <Label fx:id="totalMontantRealiseDepense" alignment="CENTER" layoutX="716.0" layoutY="332.0" prefHeight="32.0" prefWidth="169.0" text="Total Réalisé" textAlignment="CENTER">
                <font>
                   <Font size="17.0" />
                </font>
@@ -58,12 +58,12 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1fff29" height="32.0" layoutY="642.0" stroke="BLACK" strokeType="INSIDE" width="543.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1fff29" height="32.0" layoutX="541.0" layoutY="642.0" stroke="BLACK" strokeType="INSIDE" width="172.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1fff29" height="32.0" layoutX="713.0" layoutY="642.0" stroke="BLACK" strokeType="INSIDE" width="169.0" />
-            <Label fx:id="TBudget_rec" alignment="CENTER" layoutX="541.0" layoutY="642.0" prefHeight="32.0" prefWidth="172.0" text="Total Budget" textAlignment="CENTER">
+            <Label fx:id="totalBudgetRecette" alignment="CENTER" layoutX="541.0" layoutY="642.0" prefHeight="32.0" prefWidth="172.0" text="Total Budget" textAlignment="CENTER">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
-            <Label fx:id="TReal_rec" alignment="CENTER" layoutX="715.0" layoutY="642.0" prefHeight="32.0" prefWidth="169.0" text="Total Réalisé" textAlignment="CENTER">
+            <Label fx:id="totalMontantRealiseRecette" alignment="CENTER" layoutX="715.0" layoutY="642.0" prefHeight="32.0" prefWidth="169.0" text="Total Réalisé" textAlignment="CENTER">
                <font>
                   <Font size="17.0" />
                </font>

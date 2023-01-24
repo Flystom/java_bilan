@@ -3,7 +3,6 @@ module Projet3 {
 	requires javafx.fxml;
 	requires java.sql;
 	requires javafx.base;
-	requires java.json;
 	requires javafx.graphics;
 	requires java.desktop;
 	

@@ -8,15 +8,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import service.ChapitreBDD;
 
-public class ChapterController {
+public class ChapitreController {
 
-	private ChapitreBDD connectBDD = new ChapitreBDD();
+	private ChapitreBDD chapitreBDD = new ChapitreBDD();
 	
 	@FXML
 	private TextField txtNomChapitre;
@@ -33,13 +32,13 @@ public class ChapterController {
 	
 	//Changement de page
 		public void switchPage1(ActionEvent event) throws IOException{
-			Parent root = FXMLLoader.load(getClass().getResource("vueProjet3.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("vueBilan.fxml"));
 			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			scene = new Scene(root);
 			stage.setScene(scene);
 			stage.show();
 		}
-		public void switchPage2(ActionEvent event) throws IOException{
+		public void switchPageChapitre(ActionEvent event) throws IOException{
 			Parent root = FXMLLoader.load(getClass().getResource("vueChapitre.fxml"));
 			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			scene = new Scene(root);
@@ -54,22 +53,7 @@ public class ChapterController {
 			stage.show();
 		}
 	
-	public void creationChapitre() {
-		
-		 if(radioButtonChapitreDepense.isSelected()){
-				System.out.println("depense");
 
-	        }
-	        else if(radioButtonChapitreRecette.isSelected()){
-				System.out.println("recette");
-
-	        }
-
-		String nomChapitre = txtNomChapitre.getText();
-		String budgetChapitre = txtBudgetChapitre.getText();
-		System.out.println("nom : "+ nomChapitre +" montant : " + budgetChapitre);
-	}
-	
 	public void BouttonValiderChapitre() {
 
         try {
@@ -88,7 +72,7 @@ public class ChapterController {
                     categorie=2;
 
                 }
-             connectBDD.ajoutChapitre(nomChapitre,budgetChapitre,categorie);
+             chapitreBDD.ajoutChapitre(nomChapitre,budgetChapitre,categorie);
         }
         catch (Exception e){
             System.out.println(e.getMessage());

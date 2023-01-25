@@ -80,28 +80,28 @@ public class LigneController {
 	
 	//Changement de page
 		public void switchPage1(ActionEvent event) throws IOException{
-			Parent root = FXMLLoader.load(getClass().getResource("vueBilan.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/vues/vueBilan.fxml"));
 			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			scene = new Scene(root);
 			stage.setScene(scene);
 			stage.show();
 		}
 		public void switchPage2(ActionEvent event) throws IOException{
-			Parent root = FXMLLoader.load(getClass().getResource("vueChapitre.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/vues/vueChapitre.fxml"));
 			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			scene = new Scene(root);
 			stage.setScene(scene);
 			stage.show();
 		}
 		public void switchPage3(ActionEvent event) throws IOException{
-			Parent root = FXMLLoader.load(getClass().getResource("vueLigne.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/vues/vueLigne.fxml"));
 			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			scene = new Scene(root);
 			stage.setScene(scene);
 			stage.show();
 		}		
 		public void switchPage4(ActionEvent event) throws IOException{
-			Parent root = FXMLLoader.load(getClass().getResource("vueLigneModif.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/vues/vueLigneModif.fxml"));
 			stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			scene = new Scene(root);
 			stage.setScene(scene);

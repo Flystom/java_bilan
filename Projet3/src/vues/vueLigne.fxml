@@ -62,7 +62,7 @@
                 <TableColumn fx:id="Budget" minWidth="0.0" prefWidth="142.4000244140625" text="Budget" />
               </columns>
             </TableView>
-            <Button fx:id="CSV" layoutX="19.0" layoutY="138.0" mnemonicParsing="false" onAction="#handle" prefHeight="54.0" prefWidth="182.0" text="Importer fichier CSV..">
+            <Button fx:id="CSV" layoutX="19.0" layoutY="138.0" mnemonicParsing="false" onAction="#importCSV" prefHeight="54.0" prefWidth="182.0" text="Importer fichier CSV..">
                <font>
                   <Font name="Corbel" size="17.0" />
                </font></Button>

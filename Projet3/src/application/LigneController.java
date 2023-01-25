@@ -26,12 +26,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
@@ -51,7 +53,6 @@ public class LigneController {
 	@FXML
 	private TextField txtNomLigne;
 
-	//DÉPENSES
 	@FXML
 	private TableColumn<Chapitre, String> ChapNom;
 	@FXML
@@ -75,9 +76,7 @@ public class LigneController {
 		private Scene scene;
 		private Parent root;
 	
-		
-	
-	
+
 	//Changement de page
 		public void switchPage1(ActionEvent event) throws IOException{
 			Parent root = FXMLLoader.load(getClass().getResource("/vues/vueBilan.fxml"));
@@ -129,7 +128,7 @@ public class LigneController {
 	        tableau.setItems(chapitres);
 		}
 		
-		public void BouttonValiderLigne() {
+		public void BouttonValiderLigne() throws SQLException {
 
 	        try {
 	            String nomLigne = txtNomLigne.getText();
@@ -139,12 +138,31 @@ public class LigneController {
 	            ligneBDD.ajoutLigne(nomLigne, selectedChap, Montant);
 	            chapitreBDD.updateMontantChapitre(selectedChap,Montant);
 	        }
-	        catch (Exception e){
-	            System.out.println(e.getMessage());
+	        catch (NullPointerException  e){
+	            System.out.println(e);
+	            Alert alert = new Alert(AlertType.INFORMATION);
+	    		alert.setTitle("Erreur sur le chapitre");
+
+	    		// Header Text: null
+	    		alert.setHeaderText(null);
+	    		alert.setContentText("Veuillez sélectionnez un chapitre.");
+
+	    		alert.showAndWait();
+	        }catch (NumberFormatException  e){
+	            System.out.println(e);
+	            Alert alert = new Alert(AlertType.INFORMATION);
+	    		alert.setTitle("Erreur sur le montant");
+
+	    		// Header Text: null
+	    		alert.setHeaderText(null);
+	    		alert.setContentText("Le montant est incorrect.");
+
+	    		alert.showAndWait();
+	    		
 	        }
 	    }
 		
-		public void handle() throws SQLException {
+		public void importCSV() throws SQLException {
 	        // Check if Desktop is supported by Platform or not
             FileChooser fileChooser = new FileChooser();
             File selectedFile = fileChooser.showOpenDialog(null);

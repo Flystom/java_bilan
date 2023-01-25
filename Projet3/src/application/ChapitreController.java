@@ -1,6 +1,7 @@
 package application;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,6 +9,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -54,28 +57,45 @@ public class ChapitreController {
 		}
 	
 
-	public void BouttonValiderChapitre() {
+	public void BouttonValiderChapitre() throws SQLException {
 
         try {
             int categorie=0;
             String nomChapitre = txtNomChapitre.getText();
-            int budgetChapitre = Integer.parseInt(txtBudgetChapitre.getText());
-            System.out.println("nom : "+ nomChapitre +" montant : " + budgetChapitre);
+            int budgetChapitre = 0;
+            budgetChapitre = Integer.parseInt(txtBudgetChapitre.getText());
             
+            if(radioButtonChapitreDepense.isSelected() || radioButtonChapitreRecette.isSelected()) {
              if(radioButtonChapitreDepense.isSelected()){
-                    System.out.println("depense");
                     categorie=1;
 
                 }
                 else if(radioButtonChapitreRecette.isSelected()){
-                    System.out.println("recette");
                     categorie=2;
-
                 }
+            }else {
+            	Alert alert = new Alert(AlertType.INFORMATION);
+        		alert.setTitle("Erreur sur la catégorie");
+
+        		// Header Text: null
+        		alert.setHeaderText(null);
+        		alert.setContentText("Veuillez sélectionnez une catégorie.");
+
+        		alert.showAndWait();
+            }
+             
              chapitreBDD.ajoutChapitre(nomChapitre,budgetChapitre,categorie);
         }
-        catch (Exception e){
-            System.out.println(e.getMessage());
+        catch (NumberFormatException  e){
+            System.out.println(e);
+            Alert alert = new Alert(AlertType.INFORMATION);
+    		alert.setTitle("Erreur sur le montant");
+
+    		// Header Text: null
+    		alert.setHeaderText(null);
+    		alert.setContentText("Le montant est incorrect.");
+
+    		alert.showAndWait();
         }
     }
 }

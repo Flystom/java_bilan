@@ -47,7 +47,9 @@ public class ChapitreBDD {
 			st.executeUpdate("INSERT INTO utilisateur (nom, mdp) VALUES ('Antonin', 'Antonin')");
 			st.executeUpdate("INSERT INTO utilisateur (nom, mdp) VALUES ('Florian', 'Florian')");
 			
-	*/			
+			
+	*/		
+			
 		}catch (ClassNotFoundException e) {
 			    // TODO Auto-generated catch block
 			    e.printStackTrace();
@@ -141,7 +143,7 @@ public class ChapitreBDD {
         
             
             Statement st = cn.createStatement();            
-            String insertSQL = "INSERT INTO chapitre (categorie, libelle, budget, montant_realise) VALUES (?, ?, ?, ?)";
+            String insertSQL = "INSERT INTO chapitre (categorie, libelle, budget, montantRealise) VALUES (?, ?, ?, ?)";
             PreparedStatement insertStmt = this.cn.prepareStatement(insertSQL);
            
             insertStmt.setInt(1, categorie);

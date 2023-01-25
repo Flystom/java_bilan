@@ -11,7 +11,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent rootFXML = FXMLLoader.load(getClass().getResource("/vues/vueBilan.fxml"));
+            Parent rootFXML = FXMLLoader.load(getClass().getResource("/vues/vueConnexion.fxml"));
             Scene sceneFXML = new Scene(rootFXML);
             primaryStage.setScene(sceneFXML);
             primaryStage.show();

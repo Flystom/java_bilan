@@ -25,7 +25,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import service.ChapitreBDD;
 
-public class Controller implements Initializable{
+public class BilanController implements Initializable{
 
 	private ChapitreBDD chapitreBDD;
 	

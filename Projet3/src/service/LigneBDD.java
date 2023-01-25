@@ -49,15 +49,15 @@ public class LigneBDD {
 	
 	
 		//ListRec
-		public List<Ligne> resultatLigne() {
+		public List<Ligne> resultatLigne(int selectedChap) {
 			try {
 				System.out.println("Connection à la base de données pour les lignes (récupération)");
 				Statement st = cn.createStatement();
-				ResultSet csLigne = st.executeQuery("SELECT * FROM ligne");
+				ResultSet csLigne = st.executeQuery("SELECT * FROM ligne WHERE idChapitre = " + selectedChap);
 				
 				List<Ligne> listLigne = new ArrayList<>();
 				while(csLigne.next()) {
-					Ligne ligne = new Ligne(csLigne.getInt("id"), csLigne.getString("nom_ligne"), csLigne.getInt("id_chapitre"), csLigne.getDouble("montant"));
+					Ligne ligne = new Ligne(csLigne.getInt("id"), csLigne.getString("nomLigne"), csLigne.getInt("idChapitre"), csLigne.getDouble("montant"));
 					listLigne.add(ligne);
 				}
 				return listLigne;
@@ -71,13 +71,31 @@ public class LigneBDD {
 			
 		}
 		
+		public List<Ligne> touteLigne() {
+			try {
+				Statement st = cn.createStatement();
+				ResultSet csLigne = st.executeQuery("SELECT * FROM ligne");
+				
+				List<Ligne> listLigne = new ArrayList<>();
+				while(csLigne.next()) {
+					Ligne ligne = new Ligne(csLigne.getInt("id"), csLigne.getString("nomLigne"), csLigne.getInt("idChapitre"), csLigne.getDouble("montant"));
+					listLigne.add(ligne);
+				}
+				return listLigne;
+					
+			}
+				catch (SQLException e) {
+				    // TODO Auto-generated catch block
+				    e.printStackTrace();
+				}
+			return null;
+			
+		}
 		
-		
-		
-		public void ajoutLigne(String nomL, int idChapitre, Double montant) throws SQLException {
+	public void ajoutLigne(String nomL, int idChapitre, Double montant) throws SQLException {
 			
 		    Statement st = cn.createStatement();   
-		    String insertSQL = "INSERT INTO ligne (nom_ligne, id_chapitre, montant) VALUES (?, ?, ?)";
+		    String insertSQL = "INSERT INTO ligne (nomLigne, idChapitre, montant) VALUES (?, ?, ?)";
 		    PreparedStatement insertStmt = this.cn.prepareStatement(insertSQL);
 		    
 		    insertStmt.setString(1, nomL);
@@ -87,6 +105,38 @@ public class LigneBDD {
             insertStmt.executeUpdate();
 		    insertStmt.close();
 		}
+		
+		
+		public List<Ligne> modifierLigne(int id, String nomLigne, int idChapitre, Double montant) {
+			try {
+				System.out.println("modification");
+				String requete = "UPDATE ligne SET nomLigne = '" + nomLigne + "', idChapitre = " + idChapitre + ", montant = " + montant + " WHERE id = " + id;
+				PreparedStatement createTableStat = this.cn.prepareStatement(requete);
+				createTableStat.executeUpdate();					
+			}
+				catch (SQLException e) {
+				    // TODO Auto-generated catch block
+				    e.printStackTrace();
+				}
+			return null;
+			
+		}
+
+		public List<Ligne> supprimerLigne(int idLigne) {
+			try {
+				System.out.println("supression");
+				String requete = "DELETE FROM ligne WHERE id = " + idLigne;
+				PreparedStatement createTableStat = this.cn.prepareStatement(requete);
+				createTableStat.executeUpdate();					
+			}
+				catch (SQLException e) {
+				    // TODO Auto-generated catch block
+				    e.printStackTrace();
+				}
+			return null;
+			
+		}
+	
 
 			
 		

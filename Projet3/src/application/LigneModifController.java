@@ -4,13 +4,20 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.Reader;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -42,9 +49,14 @@ import service.LigneBDD;
 
 public class LigneModifController implements Initializable {
 	
-	private LigneBDD ligneBDD;
+	private ChapitreBDD chapitreBDD = new ChapitreBDD();
+	private LigneBDD ligneBDD = new LigneBDD();
 	
-	//DÉPENSES
+	@FXML
+	private RadioButton radioButtonChapitreDepense;	
+	@FXML
+	private RadioButton radioButtonChapitreRecette;
+	
 	@FXML
 	private TableColumn<Ligne, String> nomLigne;
 	@FXML
@@ -52,10 +64,24 @@ public class LigneModifController implements Initializable {
 	@FXML
 	private TableColumn<Ligne, String> montant;
 	
+	@FXML
+	private TableColumn<Chapitre, String> ChapNom;
+
     @FXML
     private TableView<Ligne> tableauLigne;
     
-	
+    //TABLEAU CHAPITRE
+  	@FXML
+  	private TableView<Chapitre> tableau;
+  	
+  	@FXML
+  	private TextField ModifNomLigne;
+  	@FXML
+  	private TextField ModifIdChap;
+  	@FXML
+  	private TextField ModifMontantLigne;
+  	
+  	private ObservableList<Chapitre> chapitres;
     private ObservableList<Ligne> lignes;
     
 	private Stage stage;
@@ -86,30 +112,78 @@ public class LigneModifController implements Initializable {
 			stage.show();
 		}
 		
+		public void afficheDepense() throws SQLException { 
+			List<Chapitre> listChapitres = chapitreBDD.resultatDepense();
+						
+			ChapNom.setCellValueFactory(new PropertyValueFactory<>("titre")); 
+	        
+	        chapitres = FXCollections.observableArrayList(listChapitres);
+	        tableau.setItems(chapitres);
+	        
+		}
+		
+		public void afficheRecette() throws SQLException { 
+			List<Chapitre> listChapitres = chapitreBDD.resultatRecette();
+			
+			ChapNom.setCellValueFactory(new PropertyValueFactory<>("titre"));
+			 
+	        chapitres = FXCollections.observableArrayList(listChapitres);
+	        tableau.setItems(chapitres);
+		}
+		
 		public void afficheLignes() throws SQLException { 
-			List<Ligne> listLigne = ligneBDD.resultatLigne();
+			int selectedChap = tableau.getSelectionModel().getSelectedItem().getId();
+			List<Ligne> listLigne = ligneBDD.resultatLigne(selectedChap);
 			System.out.println(listLigne);
-			this.nomLigne.setCellValueFactory(new PropertyValueFactory<>("nomLigne"));
-			this.idChapitre.setCellValueFactory(new PropertyValueFactory<>("idChapitre"));
-			this.montant.setCellValueFactory(new PropertyValueFactory<>("montant"));
+			nomLigne.setCellValueFactory(new PropertyValueFactory<>("nomLigne"));
+			idChapitre.setCellValueFactory(new PropertyValueFactory<>("idChapitre"));
+			montant.setCellValueFactory(new PropertyValueFactory<>("montant"));
 	        
 	        lignes = FXCollections.observableArrayList(listLigne);
 	        tableauLigne.setItems(lignes);
 		}
 		
+		public void supprimerLignes() throws SQLException { 
+			int idLigne = tableauLigne.getSelectionModel().getSelectedItem().getId();
+			List<Ligne> listLigne = ligneBDD.supprimerLigne(idLigne);
+			System.out.println(listLigne);
+		}
+		
+		public void afficheModification() throws SQLException { 
+			this.ModifNomLigne.setText(tableauLigne.getSelectionModel().getSelectedItem().getNomLigne());
+			this.ModifIdChap.setText(String.valueOf(tableauLigne.getSelectionModel().getSelectedItem().getIdChapitre()));
+			this.ModifMontantLigne.setText(String.valueOf(tableauLigne.getSelectionModel().getSelectedItem().getMontant()));
+		}
+		
+		public void Modifier() throws SQLException { 
+			int idLigne = tableauLigne.getSelectionModel().getSelectedItem().getId();
+			
+			List<Ligne> listLigne = ligneBDD.modifierLigne(idLigne, ModifNomLigne.getText(), Integer.parseInt(ModifIdChap.getText()), Double.parseDouble(ModifMontantLigne.getText()));
+			System.out.println("modif");
+			afficheLignes();
+		}
+		
+		public void exportCSV() throws SQLException, IOException {
+			List<Ligne> listLigne = ligneBDD.touteLigne();
+			
+            try (FileWriter file = new FileWriter("Ligne.csv")){
+            	
+            	String myLine = "";
+                for (Ligne ligne : listLigne) {
+                    myLine += ligne.getNomLigne()+";"+ligne.getIdChapitre()+";"+ligne.getMontant()+"\n";
+                    System.out.println(myLine);
+                   }
+                file.write(myLine);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (InputMismatchException e) {
+                e.printStackTrace();
+            }  
+	    }
 		
 		@Override
 		public void initialize(URL arg0, ResourceBundle arg1) {
 			ligneBDD = new LigneBDD();
-			
-			try {
-				afficheLignes();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			
 		}		
 	
 }

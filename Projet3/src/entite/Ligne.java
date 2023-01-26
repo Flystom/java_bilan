@@ -1,6 +1,7 @@
 package entite;
 
 public class Ligne {
+	
 	private int id;
 	private String nomLigne;
 	private int idChapitre;

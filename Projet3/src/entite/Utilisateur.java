@@ -2,15 +2,16 @@ package entite;
 
 public class Utilisateur {
 
+	private int id;
+	private String nom;
+	private String mdp;
+
 	public Utilisateur(int id, String nom, String mdp) {
 		super();
 		this.id = id;
 		this.nom = nom;
 		this.mdp = mdp;
 	}
-	private int id;
-	private String nom;
-	private String mdp;
 	
 	public int getId() {
 		return id;

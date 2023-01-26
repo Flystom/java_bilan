@@ -31,9 +31,7 @@ public class ConnexionService {
 
     public boolean verificationConnexion(String nom, String mdp) throws SQLException, IOException {
         cn = DriverManager.getConnection(URL, LOGIN, PWD);
-    //    tableUtilisateur();
-        System.out.println("test");
-
+       
         Statement st = cn.createStatement();
         ResultSet verification = st.executeQuery("SELECT nom, mdp FROM utilisateur where nom = '"+ nom + "' and mdp = '"+ mdp +"'");
         if (verification.next()) {

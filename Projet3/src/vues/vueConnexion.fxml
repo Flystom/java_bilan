@@ -7,18 +7,27 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="286.0" prefWidth="312.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ConnexionController">
+<AnchorPane prefHeight="286.0" prefWidth="312.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ConnexionController">
    <children>
-      <Pane layoutX="-113.0" layoutY="-266.0" prefHeight="200.0" prefWidth="200.0" />
-      <Button layoutX="120.0" layoutY="207.0" mnemonicParsing="false" onAction="#connexion" text="Connexion">
+      <Pane layoutX="227.0" layoutY="209.0" prefHeight="78.0" prefWidth="86.0" style="-fx-background-color: #FFDE59;" />
+      <Pane layoutX="173.0" layoutY="143.0" prefHeight="141.0" prefWidth="126.0" rotate="45.0" style="-fx-background-color: white;" />
+      <Pane layoutX="-217.0" layoutY="-160.0" prefHeight="300.0" prefWidth="271.0" rotate="45.0" style="-fx-background-color: #FF9A00;" />
+      <Button layoutX="98.0" layoutY="204.0" mnemonicParsing="false" onAction="#connexion" prefHeight="51.0" prefWidth="117.0" text="Connexion">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
       </Button>
       <TextField fx:id="txtNomUtilisateur" layoutX="81.0" layoutY="74.0" />
-      <Label layoutX="108.0" layoutY="39.0" text="Nom d'utilisateur :" />
-      <Label layoutX="116.0" layoutY="125.0" text="Mot de passe : " />
+      <Label layoutX="82.0" layoutY="28.0" text="Nom d'utilisateur :">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label layoutX="97.0" layoutY="108.0" prefHeight="34.0" prefWidth="126.0" text="Mot de passe : ">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
       <PasswordField fx:id="txtMdpUtilisateur" layoutX="81.0" layoutY="156.0" />
    </children>
 </AnchorPane>

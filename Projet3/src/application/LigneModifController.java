@@ -34,12 +34,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
@@ -134,7 +136,7 @@ public class LigneModifController implements Initializable {
 		public void afficheLignes() throws SQLException { 
 			int selectedChap = tableau.getSelectionModel().getSelectedItem().getId();
 			List<Ligne> listLigne = ligneBDD.resultatLigne(selectedChap);
-			System.out.println(listLigne);
+			
 			nomLigne.setCellValueFactory(new PropertyValueFactory<>("nomLigne"));
 			idChapitre.setCellValueFactory(new PropertyValueFactory<>("idChapitre"));
 			montant.setCellValueFactory(new PropertyValueFactory<>("montant"));
@@ -145,8 +147,12 @@ public class LigneModifController implements Initializable {
 		
 		public void supprimerLignes() throws SQLException { 
 			int idLigne = tableauLigne.getSelectionModel().getSelectedItem().getId();
-			List<Ligne> listLigne = ligneBDD.supprimerLigne(idLigne);
-			System.out.println(listLigne);
+			int selectedChap = tableauLigne.getSelectionModel().getSelectedItem().getIdChapitre();
+			double Montant = tableauLigne.getSelectionModel().getSelectedItem().getMontant();
+			List<Ligne> listLigne = ligneBDD.supprimerLigne(idLigne,selectedChap,Montant);
+		
+			afficheLignes();
+			
 		}
 		
 		public void afficheModification() throws SQLException { 
@@ -157,10 +163,19 @@ public class LigneModifController implements Initializable {
 		
 		public void Modifier() throws SQLException { 
 			int idLigne = tableauLigne.getSelectionModel().getSelectedItem().getId();
+			int selectedChap = Integer.parseInt(ModifIdChap.getText());
+			double Montant = Double.parseDouble(ModifMontantLigne.getText());
+			double montantPrecedent = tableauLigne.getSelectionModel().getSelectedItem().getMontant();
 			
-			List<Ligne> listLigne = ligneBDD.modifierLigne(idLigne, ModifNomLigne.getText(), Integer.parseInt(ModifIdChap.getText()), Double.parseDouble(ModifMontantLigne.getText()));
-			System.out.println("modif");
+			List<Ligne> listLigne = ligneBDD.modifierLigne(idLigne, ModifNomLigne.getText(), Integer.parseInt(ModifIdChap.getText()), Double.parseDouble(ModifMontantLigne.getText()),montantPrecedent);
+			
+			chapitreBDD.updateMontantChapitre(selectedChap,Montant);
 			afficheLignes();
+			ModifNomLigne.setText("");
+			ModifIdChap.setText("");
+			ModifMontantLigne.setText("");
+			
+			
 		}
 		
 		public void exportCSV() throws SQLException, IOException {
@@ -171,9 +186,17 @@ public class LigneModifController implements Initializable {
             	String myLine = "";
                 for (Ligne ligne : listLigne) {
                     myLine += ligne.getNomLigne()+";"+ligne.getIdChapitre()+";"+ligne.getMontant()+"\n";
-                    System.out.println(myLine);
+                    
                    }
                 file.write(myLine);
+                Alert alert = new Alert(AlertType.INFORMATION);
+        		alert.setTitle("Fichier exporté");
+
+        		// Header Text: null
+        		alert.setHeaderText(null);
+        		alert.setContentText("Toutes les lignes ont été exportés avec succès.");
+
+        		alert.showAndWait();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (InputMismatchException e) {

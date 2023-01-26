@@ -47,7 +47,6 @@ public class LigneBDD {
 			}
 		}
 	
-	
 		//ListRec
 		public List<Ligne> resultatLigne(int selectedChap) {
 			try {
@@ -107,12 +106,21 @@ public class LigneBDD {
 		}
 		
 		
-		public List<Ligne> modifierLigne(int id, String nomLigne, int idChapitre, Double montant) {
+		public List<Ligne> modifierLigne(int id, String nomLigne, int idChapitre, Double montant, Double montantPrecedent) {
 			try {
-				System.out.println("modification");
+				String operation = "";
+				System.out.println(montantPrecedent);
+				if(montant > montantPrecedent) {
+					operation = "+";
+				} else {
+					operation = "-";
+				}
 				String requete = "UPDATE ligne SET nomLigne = '" + nomLigne + "', idChapitre = " + idChapitre + ", montant = " + montant + " WHERE id = " + id;
+				String updateMontantRealiser = "UPDATE chapitre SET montantRealise = montantRealise " + operation + " " + montant + " WHERE id = " + idChapitre;
+				PreparedStatement updateTableStat = this.cn.prepareStatement(updateMontantRealiser);
 				PreparedStatement createTableStat = this.cn.prepareStatement(requete);
-				createTableStat.executeUpdate();					
+				updateTableStat.executeUpdate();
+				createTableStat.executeUpdate();	
 			}
 				catch (SQLException e) {
 				    // TODO Auto-generated catch block
@@ -122,12 +130,15 @@ public class LigneBDD {
 			
 		}
 
-		public List<Ligne> supprimerLigne(int idLigne) {
+		public List<Ligne> supprimerLigne(int idLigne, int idChapitre, double montant) {
 			try {
 				System.out.println("supression");
 				String requete = "DELETE FROM ligne WHERE id = " + idLigne;
+				String updateSQL = "UPDATE chapitre SET montantRealise = montantRealise - " + montant + " WHERE id = " + idChapitre;
 				PreparedStatement createTableStat = this.cn.prepareStatement(requete);
-				createTableStat.executeUpdate();					
+				PreparedStatement modifyTableStat = this.cn.prepareStatement(updateSQL);
+				createTableStat.executeUpdate();	
+				modifyTableStat.executeUpdate();	
 			}
 				catch (SQLException e) {
 				    // TODO Auto-generated catch block

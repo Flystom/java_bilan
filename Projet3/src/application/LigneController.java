@@ -135,8 +135,28 @@ public class LigneController {
 	            double Montant = Float.parseFloat(montantEcriture.getText());
 	            int selectedChap = tableau.getSelectionModel().getSelectedItem().getId();
 	            
-	            ligneBDD.ajoutLigne(nomLigne, selectedChap, Montant);
+	            if(nomLigne != "") {
+	                        
+	            Alert alert = new Alert(AlertType.INFORMATION);
+	     		alert.setTitle("Validé");
+	
+	     		// Header Text: null
+	     		alert.setHeaderText(null);
+	     		alert.setContentText("Ligne ajouté.");
+	
+	     		alert.showAndWait();
+	     		ligneBDD.ajoutLigne(nomLigne, selectedChap, Montant);
 	            chapitreBDD.updateMontantChapitre(selectedChap,Montant);
+	            }else {
+             		Alert alert = new Alert(AlertType.INFORMATION);             		
+    	     		alert.setTitle("Erreur sur le nommage");
+    	
+    	     		// Header Text: null
+    	     		alert.setHeaderText(null);
+    	     		alert.setContentText("Veuillez nommer la ligne.");
+    	
+    	     		alert.showAndWait();	
+             	}
 	        }
 	        catch (NullPointerException  e){
 	            System.out.println(e);
@@ -177,17 +197,54 @@ public class LigneController {
                 while (scanner.hasNextLine()) {
                 	String line = scanner.nextLine();
                 	String[] value = line.split(";");
-                    chapitre = Integer.parseInt(value[1]);
-                    nomLigne = value[2];
-                    montant = Double.parseDouble(value[3]);
+                    chapitre = Integer.parseInt(value[0]);
+                    nomLigne = value[1];
+                    montant = Double.parseDouble(value[2]);
                     
+                    System.out.println(chapitre + " / " + nomLigne + " / " + montant);
                     chapitreBDD.updateMontantChapitre(chapitre,montant);
                     ligneBDD.ajoutLigne(nomLigne, chapitre, montant);
+                    
+                    Alert alert = new Alert(AlertType.INFORMATION);
+            		alert.setTitle("Fichier importé");
+
+            		// Header Text: null
+            		alert.setHeaderText(null);
+            		alert.setContentText("Ligne importé avec succès.");
+
+            		alert.showAndWait();
                 }
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
+            	System.out.println(e);
+                Alert alert = new Alert(AlertType.INFORMATION);
+        		alert.setTitle("Erreur fichier");
+
+        		// Header Text: null
+        		alert.setHeaderText(null);
+        		alert.setContentText("Fichier introuvable.");
+
+        		alert.showAndWait();
             } catch (InputMismatchException e) {
-                e.printStackTrace();
-            }  
+            	System.out.println(e);
+                Alert alert = new Alert(AlertType.INFORMATION);
+        		alert.setTitle("Erreur fichier");
+
+        		// Header Text: null
+        		alert.setHeaderText(null);
+        		alert.setContentText("Fichier incompatible veuillez vérifier le contenue.");
+
+        		alert.showAndWait();
+            } 
+            catch (NumberFormatException e) {
+            	System.out.println(e);
+                Alert alert = new Alert(AlertType.INFORMATION);
+        		alert.setTitle("Erreur fichier");
+
+        		// Header Text: null
+        		alert.setHeaderText(null);
+        		alert.setContentText("Fichier incompatible veuillez vérifier le contenue.");
+
+        		alert.showAndWait();
+            } 
 	    }
 }

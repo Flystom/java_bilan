@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 
 
 import entite.Chapitre;
+import entite.Ligne;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,6 +25,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import service.ChapitreBDD;
+import service.LigneBDD;
 
 public class BilanController implements Initializable{
 
@@ -64,6 +66,7 @@ public class BilanController implements Initializable{
     private ObservableList<Chapitre> chapitres;
 		private Stage stage;
 		private Scene scene;
+		
 		//Changement de page
 	public void switchPage1(ActionEvent event) throws IOException{
 		Parent root = FXMLLoader.load(getClass().getResource("/vues/vueBilan.fxml"));
@@ -81,6 +84,14 @@ public class BilanController implements Initializable{
 	}
 	public void switchPage3(ActionEvent event) throws IOException{
 		Parent root = FXMLLoader.load(getClass().getResource("/vues/vueLigne.fxml"));
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
+	
+	public void logout(ActionEvent event) throws IOException{
+		Parent root = FXMLLoader.load(getClass().getResource("/vues/vueConnexion.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);

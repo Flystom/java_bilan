@@ -5,6 +5,7 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -50,7 +51,10 @@
       <Button layoutX="378.0" layoutY="582.0" mnemonicParsing="false" onAction="#BouttonValiderChapitre" prefHeight="45.0" prefWidth="149.0" style="-fx-background-color: #ff861f;" text="Valider">
          <font>
             <Font name="Corbel" size="29.0" />
-         </font></Button>
+         </font>
+         <effect>
+            <DropShadow />
+         </effect></Button>
       <TextField fx:id="txtNomChapitre" layoutX="306.0" layoutY="361.0" prefHeight="25.0" prefWidth="290.0" />
       <Button layoutX="31.0" layoutY="27.0" mnemonicParsing="false" onAction="#switchPage1" prefHeight="25.0" prefWidth="182.0" text="Bilan DEPENSES et RECETTES">
          <font>

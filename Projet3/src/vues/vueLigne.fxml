@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
@@ -55,7 +56,10 @@
             <Button fx:id="valider" layoutX="384.0" layoutY="603.0" mnemonicParsing="false" onAction="#BouttonValiderLigne" style="-fx-background-color: #ffd821;" text="Valider">
                <font>
                   <Font name="Corbel" size="29.0" />
-               </font></Button>
+               </font>
+               <effect>
+                  <DropShadow />
+               </effect></Button>
             <TableView fx:id="tableau" layoutX="208.0" layoutY="271.0" prefHeight="200.0" prefWidth="476.0">
               <columns>
                 <TableColumn fx:id="ChapNom" prefWidth="334.3999938964844" text="Nom du chapitre" />
@@ -75,7 +79,7 @@
                <font>
                   <Font name="Corbel" size="12.0" />
                </font></Button>
-            <Label layoutX="565.0" layoutY="21.0" text="AJOUT DE LIGNES">
+            <Label layoutX="565.0" layoutY="21.0" text="GESTION DES LIGNES">
                <font>
                   <Font name="Corbel Bold" size="27.0" />
                </font>

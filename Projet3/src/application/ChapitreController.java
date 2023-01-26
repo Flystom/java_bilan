@@ -73,6 +73,27 @@ public class ChapitreController {
                 else if(radioButtonChapitreRecette.isSelected()){
                     categorie=2;
                 }
+             if(nomChapitre != "") {
+            	Alert alert = new Alert(AlertType.INFORMATION);             		
+	     		alert.setTitle("Validé");
+	
+	     		// Header Text: null
+	     		alert.setHeaderText(null);
+	     		alert.setContentText("Chapitre créé.");
+	
+	     		alert.showAndWait();
+	     		
+	     		chapitreBDD.ajoutChapitre(nomChapitre,budgetChapitre,categorie);
+             	}else {
+             		Alert alert = new Alert(AlertType.INFORMATION);             		
+    	     		alert.setTitle("Erreur sur le nommage");
+    	
+    	     		// Header Text: null
+    	     		alert.setHeaderText(null);
+    	     		alert.setContentText("Veuillez nommer le chapitre.");
+    	
+    	     		alert.showAndWait();	
+             	}
             }else {
             	Alert alert = new Alert(AlertType.INFORMATION);
         		alert.setTitle("Erreur sur la catégorie");
@@ -83,8 +104,6 @@ public class ChapitreController {
 
         		alert.showAndWait();
             }
-             
-             chapitreBDD.ajoutChapitre(nomChapitre,budgetChapitre,categorie);
         }
         catch (NumberFormatException  e){
             System.out.println(e);

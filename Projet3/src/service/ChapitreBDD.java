@@ -26,11 +26,16 @@ public class ChapitreBDD {
 	
 	public ChapitreBDD() {
 		try {
+			//Connexion à la base de donnée derby
 			Class.forName(DRIVER);
 			cn = DriverManager.getConnection(URL, LOGIN, PWD);
 			System.out.println("Connexion à la base de données (insertion)");
 			Statement st = cn.createStatement();
 			System.out.println(cn);
+			
+			
+			//Requêtes pour Créer les tables et insérer quelques données pour tester l'application
+			
 	/*		st.execute("drop table ligne");
 			st.execute("create table ligne (id INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1) PRIMARY KEY,"
 					+ "nomLigne varchar(255), idChapitre int, montant DOUBLE PRECISION)");
@@ -49,7 +54,6 @@ public class ChapitreBDD {
 			
 			
 	*/		
-			
 		}catch (ClassNotFoundException e) {
 			    // TODO Auto-generated catch block
 			    e.printStackTrace();
@@ -61,6 +65,7 @@ public class ChapitreBDD {
 			}
 		}
 	
+		//Permet d'afficher tout les chapitres de la catégories dépense
 		public List<Chapitre> resultatDepense() {
 			try {
 				Statement st = cn.createStatement();
@@ -81,6 +86,7 @@ public class ChapitreBDD {
 			
 		}
 		
+		//Permet d'avoir le total des budgets des chapitres de la catégorie dépense
 		public double totalBudgetDepense(List<Chapitre> listChapitres){
 			double totalbudgetdep = 0;
 			for (Chapitre dep : listChapitres) {
@@ -89,6 +95,7 @@ public class ChapitreBDD {
 			return totalbudgetdep;
 		}
 		
+		//Permet d'avoir le total des montants réalisé des chapitres de la catégorie dépense
 		public double totalMontantRealiseDepense(List<Chapitre> listChapitres){
 			double totalMrealDep = 0;
 			for (Chapitre dep : listChapitres) {
@@ -97,6 +104,7 @@ public class ChapitreBDD {
 			return totalMrealDep;
 		}
 		
+		//Permet d'afficher tout les chapitres de la catégories recette
 		public List<Chapitre> resultatRecette() {
 			try {
 				System.out.println("Connexion à la base de données pour les recettes (récupération)");
@@ -110,7 +118,7 @@ public class ChapitreBDD {
 				}
 				return listRec;
 					
-			}
+				}
 				catch (SQLException e) {
 				    // TODO Auto-generated catch block
 				    e.printStackTrace();
@@ -119,7 +127,7 @@ public class ChapitreBDD {
 			
 		}
 		
-		
+		//Permet d'avoir le total des budgets des chapitres de la catégorie recette
 		public double totalBudgetRec(List<Chapitre> listChapitres){
 			double totalbudgetRec = 0;
 			for (Chapitre rec : listChapitres) {
@@ -130,6 +138,7 @@ public class ChapitreBDD {
 			return totalbudgetRec;
 		}
 		
+		//Permet d'avoir le total des montants réalisé des chapitres de la catégorie recette
 		public double totalMrealRec(List<Chapitre> listChapitres){
 			double totalMrealRec = 0;
 			for (Chapitre rec : listChapitres) {
@@ -139,6 +148,7 @@ public class ChapitreBDD {
 			return totalMrealRec;
 		}
 		
+		//Méthode permettant d'ajouter les chapitres
 		public void ajoutChapitre(String nomChapitre, int budgetChapitre, int categorie) throws SQLException {
         
             
@@ -155,6 +165,7 @@ public class ChapitreBDD {
             
         }
 		
+		//Méthode permettant de mettre à jour le montant des chapitres
 		public void updateMontantChapitre(int idChapitre, Double budget) throws SQLException {
     
     
@@ -166,8 +177,4 @@ public class ChapitreBDD {
 		    insertStmt.close();
 	    
 		}
-		
-
-			
-		
 	}

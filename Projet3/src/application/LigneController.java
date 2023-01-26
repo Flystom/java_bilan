@@ -42,17 +42,22 @@ import service.ChapitreBDD;
 import service.LigneBDD;
 
 public class LigneController {
-
+	
+	//Nouvelles connexions aux table Chapitre et Ligne de la BDD
 	private ChapitreBDD chapitreBDD = new ChapitreBDD();
 	private LigneBDD ligneBDD = new LigneBDD();
 	
+	//Selection de la catégorie
 	@FXML
 	private RadioButton radioButtonChapitreDepense;	
 	@FXML
 	private RadioButton radioButtonChapitreRecette;
+	
+	//Nom de la ligne
 	@FXML
 	private TextField txtNomLigne;
 
+	//Colonnes du tableau des chapitres
 	@FXML
 	private TableColumn<Chapitre, String> ChapNom;
 	@FXML
@@ -62,12 +67,15 @@ public class LigneController {
 	@FXML
 	private TableView<Chapitre> tableau;
 	
+	//Montant de la ligne
 	@FXML
 	private TextField montantEcriture;
 	
+	//Boutton pour valider
 	@FXML
 	private Button valider;
 	
+	//Boutton pour l'import CSV
 	@FXML
 	private Button CSV;
 	
@@ -136,7 +144,8 @@ public class LigneController {
 	            int selectedChap = tableau.getSelectionModel().getSelectedItem().getId();
 	            
 	            if(nomLigne != "") {
-	                        
+	            	
+	            //Message d'alerte pour indiquer que la ligne est ajouté            
 	            Alert alert = new Alert(AlertType.INFORMATION);
 	     		alert.setTitle("Validé");
 	
@@ -147,7 +156,10 @@ public class LigneController {
 	     		alert.showAndWait();
 	     		ligneBDD.ajoutLigne(nomLigne, selectedChap, Montant);
 	            chapitreBDD.updateMontantChapitre(selectedChap,Montant);
-	            }else {
+	            
+	            } else {
+	            	
+	            	//Message d'alerte concernant une erreur de nommage
              		Alert alert = new Alert(AlertType.INFORMATION);             		
     	     		alert.setTitle("Erreur sur le nommage");
     	
@@ -157,9 +169,9 @@ public class LigneController {
     	
     	     		alert.showAndWait();	
              	}
-	        }
-	        catch (NullPointerException  e){
-	            System.out.println(e);
+	        } catch (NullPointerException  e){
+	        	
+	        	//Message d'alerte concernant une erreur sur la selection du chapitre
 	            Alert alert = new Alert(AlertType.INFORMATION);
 	    		alert.setTitle("Erreur sur le chapitre");
 
@@ -168,8 +180,10 @@ public class LigneController {
 	    		alert.setContentText("Veuillez sélectionnez un chapitre.");
 
 	    		alert.showAndWait();
-	        }catch (NumberFormatException  e){
-	            System.out.println(e);
+	    		
+	        } catch (NumberFormatException  e){
+	        	
+	            //Message d'alerte concernant une erreur sur le montant
 	            Alert alert = new Alert(AlertType.INFORMATION);
 	    		alert.setTitle("Erreur sur le montant");
 
@@ -182,8 +196,10 @@ public class LigneController {
 	        }
 	    }
 		
+		//Méthode pour l'import d'un fichier CSV (nomLigne, idChapitre, montant)
 		public void importCSV() throws SQLException {
-	        // Check if Desktop is supported by Platform or not
+			
+			//Ouvre l'explorateur fichier de l'ordinateur
             FileChooser fileChooser = new FileChooser();
             File selectedFile = fileChooser.showOpenDialog(null);
             String filePath = selectedFile.getAbsolutePath();
@@ -195,6 +211,7 @@ public class LigneController {
 
             try (Scanner scanner = new Scanner(new File(filePath))) {
                 while (scanner.hasNextLine()) {
+                	
                 	String line = scanner.nextLine();
                 	String[] value = line.split(";");
                     chapitre = Integer.parseInt(value[0]);
@@ -214,8 +231,10 @@ public class LigneController {
 
             		alert.showAndWait();
                 }
+                
             } catch (FileNotFoundException e) {
-            	System.out.println(e);
+            	
+            	//Message d'alerte sur la destination du fichier
                 Alert alert = new Alert(AlertType.INFORMATION);
         		alert.setTitle("Erreur fichier");
 
@@ -224,8 +243,10 @@ public class LigneController {
         		alert.setContentText("Fichier introuvable.");
 
         		alert.showAndWait();
+        		
             } catch (InputMismatchException e) {
-            	System.out.println(e);
+            	
+            	//Message d'alerte sur l'incompatibilité du fichier
                 Alert alert = new Alert(AlertType.INFORMATION);
         		alert.setTitle("Erreur fichier");
 
@@ -236,7 +257,8 @@ public class LigneController {
         		alert.showAndWait();
             } 
             catch (NumberFormatException e) {
-            	System.out.println(e);
+            	
+            	//Message d'alerte sur l'incompatibilité du fichier (au niveau numérique
                 Alert alert = new Alert(AlertType.INFORMATION);
         		alert.setTitle("Erreur fichier");
 

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LigneController">
+   <children>
+      <Pane prefHeight="684.0" prefWidth="892.0" style="-fx-background-color: palegoldenrod;">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fffa216b" height="69.0" layoutX="12.0" layoutY="131.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="197.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fffa216b" height="77.0" layoutX="193.0" layoutY="504.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="505.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fffa216b" height="244.0" layoutX="196.0" layoutY="240.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="501.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fffa216b" height="111.0" layoutX="241.0" layoutY="110.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="410.0" />
+            <Label layoutX="181.0" layoutY="74.0" text="FORMULAIRE D’AJOUT D’UNE ÉCRITURE COMPTABLE">
+               <font>
+                  <Font name="Corbel Bold" size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="278.0" layoutY="117.0" text="Votre chapitre est catégorisé dans :">
+               <font>
+                  <Font name="Corbel" size="23.0" />
+               </font>
+            </Label>
+            <RadioButton fx:id="radioButtonChapitreDepense" layoutX="286.0" layoutY="165.0" mnemonicParsing="false" onMouseClicked="#afficheDepense" text="Dépense">
+               <toggleGroup>
+                  <ToggleGroup fx:id="Ligne_radio" />
+               </toggleGroup>
+               <font>
+                  <Font name="Corbel" size="16.0" />
+               </font></RadioButton>
+            <RadioButton fx:id="radioButtonChapitreRecette" layoutX="507.0" layoutY="165.0" mnemonicParsing="false" onMouseClicked="#afficheRecette" text="Recette" toggleGroup="$Ligne_radio">
+               <font>
+                  <Font name="Corbel" size="16.0" />
+               </font></RadioButton>
+            <Label layoutX="329.0" layoutY="244.0" text="Sélectionner le chapitre :">
+               <font>
+                  <Font name="Corbel" size="23.0" />
+               </font>
+            </Label>
+            <Label layoutX="488.0" layoutY="511.0" text="Montant réalisé (€) : ">
+               <font>
+                  <Font name="Corbel" size="23.0" />
+               </font>
+            </Label>
+            <TextField fx:id="montantEcriture" layoutX="488.0" layoutY="543.0" prefHeight="25.0" prefWidth="195.0" />
+            <Button fx:id="valider" layoutX="384.0" layoutY="603.0" mnemonicParsing="false" onAction="#BouttonValiderLigne" style="-fx-background-color: #ffd821;" text="Valider">
+               <font>
+                  <Font name="Corbel" size="29.0" />
+               </font>
+               <effect>
+                  <DropShadow />
+               </effect></Button>
+            <TableView fx:id="tableau" layoutX="208.0" layoutY="271.0" prefHeight="200.0" prefWidth="476.0">
+              <columns>
+                <TableColumn fx:id="ChapNom" prefWidth="334.3999938964844" text="Nom du chapitre" />
+                <TableColumn fx:id="Budget" minWidth="0.0" prefWidth="142.4000244140625" text="Budget" />
+              </columns>
+            </TableView>
+            <Button fx:id="CSV" layoutX="19.0" layoutY="138.0" mnemonicParsing="false" onAction="#importCSV" prefHeight="54.0" prefWidth="182.0" text="Importer fichier CSV..">
+               <font>
+                  <Font name="Corbel" size="17.0" />
+               </font></Button>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" depthTest="DISABLE" fill="#ffd821" height="54.0" layoutX="9.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" width="873.0" />
+            <Button layoutX="19.0" layoutY="24.0" mnemonicParsing="false" onAction="#switchPage1" prefHeight="25.0" prefWidth="182.0" text="Bilan DEPENSES et RECETTES">
+               <font>
+                  <Font name="Corbel" size="12.0" />
+               </font></Button>
+            <Button layoutX="215.0" layoutY="24.0" mnemonicParsing="false" onAction="#switchPage2" prefHeight="25.0" prefWidth="127.0" text="Ajouter un chapitre">
+               <font>
+                  <Font name="Corbel" size="12.0" />
+               </font></Button>
+            <Label layoutX="565.0" layoutY="21.0" text="GESTION DES LIGNES">
+               <font>
+                  <Font name="Corbel Bold" size="27.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtNomLigne" layoutX="204.0" layoutY="543.0" prefHeight="25.0" prefWidth="195.0" />
+            <Label layoutX="207.0" layoutY="511.0" text="Nom de la ligne :">
+               <font>
+                  <Font name="Corbel" size="23.0" />
+               </font>
+            </Label>
+            <Button layoutX="353.0" layoutY="24.0" mnemonicParsing="false" onAction="#switchPage4" prefHeight="25.0" prefWidth="127.0" text="Afficher les lignes">
+               <font>
+                  <Font name="Corbel" size="12.0" />
+               </font></Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

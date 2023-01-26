@@ -51,14 +51,17 @@ import service.LigneBDD;
 
 public class LigneModifController implements Initializable {
 	
+	//Nouvelles connexions aux table Chapitre et Ligne de la BDD
 	private ChapitreBDD chapitreBDD = new ChapitreBDD();
 	private LigneBDD ligneBDD = new LigneBDD();
 	
+	//Selection de la catégorie
 	@FXML
 	private RadioButton radioButtonChapitreDepense;	
 	@FXML
 	private RadioButton radioButtonChapitreRecette;
 	
+	//colonne du tableau Ligne
 	@FXML
 	private TableColumn<Ligne, String> nomLigne;
 	@FXML
@@ -66,9 +69,11 @@ public class LigneModifController implements Initializable {
 	@FXML
 	private TableColumn<Ligne, String> montant;
 	
+	//Colonne nom du Chapitre
 	@FXML
 	private TableColumn<Chapitre, String> ChapNom;
 
+	//tableau ligne
     @FXML
     private TableView<Ligne> tableauLigne;
     
@@ -76,6 +81,7 @@ public class LigneModifController implements Initializable {
   	@FXML
   	private TableView<Chapitre> tableau;
   	
+  	//Text field permettant la modification d'une ligne
   	@FXML
   	private TextField ModifNomLigne;
   	@FXML
@@ -133,6 +139,7 @@ public class LigneModifController implements Initializable {
 	        tableau.setItems(chapitres);
 		}
 		
+		//Permet d'afficher les lignes du chapitre sélectionné
 		public void afficheLignes() throws SQLException { 
 			int selectedChap = tableau.getSelectionModel().getSelectedItem().getId();
 			List<Ligne> listLigne = ligneBDD.resultatLigne(selectedChap);
@@ -145,6 +152,7 @@ public class LigneModifController implements Initializable {
 	        tableauLigne.setItems(lignes);
 		}
 		
+		//Suppression des lignes
 		public void supprimerLignes() throws SQLException { 
 			int idLigne = tableauLigne.getSelectionModel().getSelectedItem().getId();
 			int selectedChap = tableauLigne.getSelectionModel().getSelectedItem().getIdChapitre();
@@ -155,12 +163,14 @@ public class LigneModifController implements Initializable {
 			
 		}
 		
+		//Permet d'afficher les informations de la ligne sélectionné
 		public void afficheModification() throws SQLException { 
 			this.ModifNomLigne.setText(tableauLigne.getSelectionModel().getSelectedItem().getNomLigne());
 			this.ModifIdChap.setText(String.valueOf(tableauLigne.getSelectionModel().getSelectedItem().getIdChapitre()));
 			this.ModifMontantLigne.setText(String.valueOf(tableauLigne.getSelectionModel().getSelectedItem().getMontant()));
 		}
 		
+		//Permet de modifier la ligne côté BDD
 		public void Modifier() throws SQLException { 
 			int idLigne = tableauLigne.getSelectionModel().getSelectedItem().getId();
 			int selectedChap = Integer.parseInt(ModifIdChap.getText());
@@ -178,6 +188,7 @@ public class LigneModifController implements Initializable {
 			
 		}
 		
+		//Méthode pour l'export en CSV de toutes les lignes
 		public void exportCSV() throws SQLException, IOException {
 			List<Ligne> listLigne = ligneBDD.touteLigne();
 			
@@ -188,6 +199,7 @@ public class LigneModifController implements Initializable {
                     myLine += ligne.getNomLigne()+";"+ligne.getIdChapitre()+";"+ligne.getMontant()+"\n";
                     
                    }
+                
                 file.write(myLine);
                 Alert alert = new Alert(AlertType.INFORMATION);
         		alert.setTitle("Fichier exporté");

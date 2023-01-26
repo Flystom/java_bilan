@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<Pane prefHeight="674.0" prefWidth="882.0" style="-fx-background-color: moccasin;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ChapitreController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff85216c" height="111.0" layoutX="247.0" layoutY="158.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="410.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff85216c" height="111.0" layoutX="247.0" layoutY="298.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="OUTSIDE" width="410.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff85216c" height="111.0" layoutX="246.0" layoutY="433.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="OUTSIDE" width="410.0" />
+      <Label layoutX="176.0" layoutY="100.0" text="FORMULAIRE DE SAISI DE BUDGET POUR UN CHAPITRE">
+         <font>
+            <Font name="Corbel Bold" size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="280.0" layoutY="165.0" text="Votre chapitre sera catégorisé dans :">
+         <font>
+            <Font name="Corbel" size="23.0" />
+         </font>
+      </Label>
+      <RadioButton fx:id="radioButtonChapitreDepense" layoutX="305.0" layoutY="213.0" mnemonicParsing="false" text="Dépense">
+         <toggleGroup>
+            <ToggleGroup fx:id="Chap_radio" />
+         </toggleGroup>
+         <font>
+            <Font name="Corbel" size="16.0" />
+         </font></RadioButton>
+      <RadioButton fx:id="radioButtonChapitreRecette" layoutX="492.0" layoutY="213.0" mnemonicParsing="false" style="-fx-background-color: npthing;" text="Recette" toggleGroup="$Chap_radio">
+         <font>
+            <Font name="Corbel" size="16.0" />
+         </font></RadioButton>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" depthTest="DISABLE" fill="#ff861f" height="54.0" layoutX="14.0" layoutY="12.0" stroke="BLACK" strokeType="INSIDE" width="852.0" />
+      <Label layoutX="293.0" layoutY="310.0" text="Entrez le nom de votre chapitre : ">
+         <font>
+            <Font name="Corbel" size="23.0" />
+         </font>
+      </Label>
+      <Label layoutX="282.0" layoutY="447.0" text="Saisissez le montant du budget (€) : ">
+         <font>
+            <Font name="Corbel" size="23.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtBudgetChapitre" layoutX="373.0" layoutY="489.0" prefHeight="25.0" prefWidth="157.0" />
+      <Button layoutX="378.0" layoutY="582.0" mnemonicParsing="false" onAction="#BouttonValiderChapitre" prefHeight="45.0" prefWidth="149.0" style="-fx-background-color: #ff861f;" text="Valider">
+         <font>
+            <Font name="Corbel" size="29.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect></Button>
+      <TextField fx:id="txtNomChapitre" layoutX="306.0" layoutY="361.0" prefHeight="25.0" prefWidth="290.0" />
+      <Button layoutX="31.0" layoutY="27.0" mnemonicParsing="false" onAction="#switchPage1" prefHeight="25.0" prefWidth="182.0" text="Bilan DEPENSES et RECETTES">
+         <font>
+            <Font name="Corbel" size="12.0" />
+         </font></Button>
+      <Button layoutX="234.0" layoutY="27.0" mnemonicParsing="false" onAction="#switchPage3" prefHeight="25.0" prefWidth="182.0" text="Ajouter une écriture comptable">
+         <font>
+            <Font name="Corbel" size="12.0" />
+         </font></Button>
+      <Label layoutX="516.0" layoutY="5.0" prefHeight="69.0" prefWidth="274.0" text="CRÉATION CHAPITRE">
+         <font>
+            <Font name="Corbel Bold" size="27.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

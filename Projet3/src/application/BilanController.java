@@ -67,7 +67,7 @@ public class BilanController implements Initializable{
 		private Stage stage;
 		private Scene scene;
 		
-		//Changement de page
+		//Changement de page avec méthode Switch 
 	public void switchPage1(ActionEvent event) throws IOException{
 		Parent root = FXMLLoader.load(getClass().getResource("/vues/vueBilan.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();

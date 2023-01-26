@@ -18,17 +18,19 @@ public class ConnexionService {
     private String LOGIN = "";
     private String PWD = "";
 
+    //Méthode pour créer la table des utilisateur (utilisé une seule fois)
     public void tableUtilisateur() throws SQLException {
 
         Statement st = cn.createStatement();
         //st.execute("drop table utilisateur");
-        st.execute("create table utilisateur (id INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1) PRIMARY KEY,"
-                + "nom varchar(255), mdp varchar(255))");
-        st.executeUpdate("INSERT INTO utilisateur (nom, mdp) VALUES ('Antonin', 'Antonin')");
-        st.executeUpdate("INSERT INTO utilisateur (nom, mdp) VALUES ('Florian', 'Florian')");
+//        st.execute("create table utilisateur (id INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1) PRIMARY KEY,"
+//                + "nom varchar(255), mdp varchar(255))");
+//        st.executeUpdate("INSERT INTO utilisateur (nom, mdp) VALUES ('Antonin', 'Antonin')");
+//        st.executeUpdate("INSERT INTO utilisateur (nom, mdp) VALUES ('Florian', 'Florian')");
     }
 
 
+    //Méthode pour vérifier la connexion
     public boolean verificationConnexion(String nom, String mdp) throws SQLException, IOException {
         cn = DriverManager.getConnection(URL, LOGIN, PWD);
        
@@ -36,11 +38,9 @@ public class ConnexionService {
         ResultSet verification = st.executeQuery("SELECT nom, mdp FROM utilisateur where nom = '"+ nom + "' and mdp = '"+ mdp +"'");
         if (verification.next()) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
-
 
     }
 

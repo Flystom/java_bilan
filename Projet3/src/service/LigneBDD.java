@@ -26,6 +26,7 @@ public class LigneBDD {
 	
 	public LigneBDD() {
 		try {
+			//Connexion à la table ligneBDD de la BDD
 			Class.forName(DRIVER);
 			cn = DriverManager.getConnection(URL, LOGIN, PWD);
 			System.out.println("Connexion à la base de données (insertion)");
@@ -34,7 +35,6 @@ public class LigneBDD {
 //			st.execute("create table ligne (id INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1) PRIMARY KEY,"
 //					+ "nom_ligne varchar(255), id_chapitre int, montant DOUBLE PRECISION)");
 //			
-
 				
 		}catch (ClassNotFoundException e) {
 			    // TODO Auto-generated catch block
@@ -47,7 +47,7 @@ public class LigneBDD {
 			}
 		}
 	
-		//ListRec
+		//Permet d'afficher les lignes en fonction des chapitres
 		public List<Ligne> resultatLigne(int selectedChap) {
 			try {
 				System.out.println("Connection à la base de données pour les lignes (récupération)");
@@ -70,6 +70,7 @@ public class LigneBDD {
 			
 		}
 		
+		//Permet d'afficher toute les lignes
 		public List<Ligne> touteLigne() {
 			try {
 				Statement st = cn.createStatement();
@@ -82,15 +83,15 @@ public class LigneBDD {
 				}
 				return listLigne;
 					
-			}
-				catch (SQLException e) {
-				    // TODO Auto-generated catch block
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
 				    e.printStackTrace();
 				}
 			return null;
 			
 		}
 		
+		//permet d'ajouter des lignes dans la base de donnée
 	public void ajoutLigne(String nomL, int idChapitre, Double montant) throws SQLException {
 			
 		    Statement st = cn.createStatement();   
@@ -105,7 +106,7 @@ public class LigneBDD {
 		    insertStmt.close();
 		}
 		
-		
+		//permet de modifier les lignes présente dans la base de donnée
 		public List<Ligne> modifierLigne(int id, String nomLigne, int idChapitre, Double montant, Double montantPrecedent) {
 			try {
 				String operation = "";
@@ -129,7 +130,8 @@ public class LigneBDD {
 			return null;
 			
 		}
-
+		
+		//permet de supprimer une ligne en particulier dans la base de donnée
 		public List<Ligne> supprimerLigne(int idLigne, int idChapitre, double montant) {
 			try {
 				System.out.println("supression");
@@ -146,9 +148,5 @@ public class LigneBDD {
 				}
 			return null;
 			
-		}
-	
-
-			
-		
+		}	
 	}

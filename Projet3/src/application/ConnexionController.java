@@ -18,19 +18,21 @@ import service.ChapitreBDD;
 import service.ConnexionService;
 
 public class ConnexionController {
-
+	
+	//Nouvelle connexion à la table connexion dans la BDD
     private ConnexionService connexionService = new ConnexionService();
 
+    @FXML 
+    private TextField txtNomUtilisateur;
 
-    @FXML private TextField txtNomUtilisateur;
-
-    @FXML private PasswordField txtMdpUtilisateur;
+    @FXML 
+    private PasswordField txtMdpUtilisateur;
 
     private Stage stage;
     private Scene scene;
     private Parent root;
 
-
+    //Changement de pages
     public void switchPageBilan(ActionEvent event) throws IOException{
         Parent root = FXMLLoader.load(getClass().getResource("/vues/vueBilan.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -38,15 +40,18 @@ public class ConnexionController {
         stage.setScene(scene);
         stage.show();
     }
-
+    
+    //Méthode de connexion
     public void connexion(ActionEvent event) throws SQLException, IOException {
         String nom = txtNomUtilisateur.getText();
         String mdp = txtMdpUtilisateur.getText();
         boolean verif = connexionService.verificationConnexion(nom,mdp);
         if(verif) {
             switchPageBilan(event);
-        }
-        else {
+            
+        } else {
+        	
+        	//Message d'alerte pour une erreur de connexion
             Alert alert = new Alert(AlertType.INFORMATION);
     		alert.setTitle("Erreur connexion");
 
